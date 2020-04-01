@@ -5,21 +5,34 @@ const Schema = mongoose.Schema;
 const dogSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User" },
-
-    Name: string,
-
-    Race: string,
-
-    Description: string,
-
-    comment: String
+    name: {
+      type: String,
+      require: true
+    },
+    race: {
+      type: String
+    },
+    description: {
+      type: String
+    },
+    comment: {
+      type: String
+    }
   },
-
   {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret.createdAt;
+        delete ret.updatedAt;
+        delete ret.__v;
+        return ret;
+      }
+    }
   }
 );
 
-const Dog = mongoose.model("dog", dogSchema);
+const Dog = mongoose.model("Dog", dogSchema);
 
 module.exports = Dog;

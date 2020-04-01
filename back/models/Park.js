@@ -1,10 +1,17 @@
 const mongoose = require("mongoose");
 
-const schema = new mongoose.Schema(
+const parkSchema = new mongoose.Schema(
   {
-    name: String,
-    transport: String,
-    description: String,
+    name: {
+      type: String,
+      required: "Name is required"
+    },
+    transport: {
+      type: String
+    },
+    description: {
+      type: String
+    },
     owner: { type: mongoose.Types.ObjectId, ref: "User" },
     location: {
       type: { type: String, default: "Point" },
@@ -18,13 +25,16 @@ const schema = new mongoose.Schema(
     timestamps: true,
     toJSON: {
       transform(doc, ret) {
-        delete ret.__v;
-        delete ret.updatedAt;
+        ret.id = ret._id;
         delete ret.createdAt;
+        delete ret.updatedAt;
+        delete ret.__v;
         return ret;
       }
     }
   }
 );
 
-module.exports = mongoose.model("park", schema);
+const Park = mongoose.model("Park", parkSchema);
+
+module.exports = Park;
