@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-
+const { hashPassword } = require("../lib/hashing");
 const SALT_WORK_FACTOR = 10;
 const IMAGE_URL = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg)/g;
 const EMAIL_PATTERN = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       match: [PASSWORD_PATTERN, "Invalid password pattern"]
     }
+
     // avatar: {
     //   type: String,
     //   default: 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg',
@@ -49,23 +50,14 @@ const userSchema = new mongoose.Schema(
     }
   }
 );
-// ​
-// userSchema.pre('save', function (next) {
-//   const user = this;
-// ​
-//   if (!user.isModified('password')) {
-//     return next();
-//   }
-// ​
-//   bcrypt.genSalt(SALT_WORK_FACTOR)
-//     .then((salt) => {
-//       bcrypt.hash(user.password, salt)
-//         .then((hash) => {
-//           user.password = hash;
-//           next();
-//         });
-//     })
-//     .catch(error => next(error));
-// });
+
+userSchema.pre("save", async function(next) {
+  const user = this;
+  if (!user.isModified("password")) {
+    return next();
+  }
+  user.password = await hashPassword(user.password);
+  next();
+});
 const User = mongoose.model("User", userSchema);
 module.exports = User;

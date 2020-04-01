@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../models/User");
+const User = require("../models/User");
+const Dog = require("../models/Dog");
 const _ = require("lodash");
 const passport = require("passport");
 const { hashPassword, checkHashed } = require("../lib/hashing");
@@ -8,22 +9,33 @@ const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 // SIGNUP
 router.post("/signup", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, email, password, hasDog, dogName, race } = req.body;
 
-  console.log(username, password);
+  console.log(name, password);
 
   // Create the user
-  const existingUser = await Users.findOne({ username });
+  const existingUser = await User.findOne({ name, email });
   if (!existingUser) {
-    const newUser = await Users.create({
-      username,
-      password: hashPassword(password)
+    const newUser = await User.create({
+      name,
+      email,
+      password
     });
+    console.log(newUser);
+    if (hasDog === true) {
+      const newDog = await Dog.create({
+        dogName,
+        race,
+        user: newUser._id
+      });
+    }
     // Directly login user
     req.logIn(newUser, err => {
-      res.json(_.pick(req.user, ["username", "_id", "createdAt", "updatedAt"]));
+      res.json(
+        _.pick(req.user, ["name", "email", "_id", "createdAt", "updatedAt"])
+      );
     });
-    console.log(username, "resgitrado");
+    console.log(name, "resgitrado");
   } else {
     res.json({ status: "User Exist" });
   }
@@ -47,7 +59,7 @@ router.post("/login", (req, res, next) => {
       }
 
       return res.json(
-        _.pick(req.user, ["username", "_id", "createdAt", "updatedAt"])
+        _.pick(req.user, ["name", "email", "_id", "createdAt", "updatedAt"])
       );
     });
   })(req, res, next);
