@@ -35,7 +35,7 @@ router.post("/signup", async (req, res, next) => {
         _.pick(req.user, ["name", "email", "_id", "createdAt", "updatedAt"])
       );
     });
-    console.log(name, "resgitrado");
+    console.log(name, "register");
   } else {
     res.json({ status: "User Exist" });
   }
@@ -46,7 +46,7 @@ router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
       console.log(err);
-      return res.json({ status: 500, message: "Error de autentificación" });
+      return res.json({ status: 500, message: "Authentication Error" });
     }
 
     if (!user) {
@@ -55,7 +55,7 @@ router.post("/login", (req, res, next) => {
 
     req.login(user, err => {
       if (err) {
-        return res.status(500).json({ message: "Sesion mal guardada" });
+        return res.status(500).json({ message: "Session not saved" });
       }
 
       return res.json(
@@ -65,48 +65,50 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-// // LOGOUT
-// router.post("/logout", isLoggedIn(), async (req, res, next) => {
-//   if (req.user) {
-//     req.logout();
-//     return res.json({ status: "Log out" });
-//   } else {
-//     return res
-//       .status(401)
-//       .json({ status: "You have to be logged in to logout" });
-//   }
-// });
+// LOGOUT
+router.post("/logout", isLoggedIn(), async (req, res, next) => {
+  if (req.user) {
+    req.logout();
+    return res.json({ status: "Log out" });
+  } else {
+    return res
+      .status(401)
+      .json({ status: "You have to be logged in to logout" });
+  }
+});
 
-// /* EDIT */
-// router.post("/edit", isLoggedIn(), async (req, res, next) => {
-//   try {
-//     const id = req.user._id;
-//     const { username, campus, course } = req.body;
-//     await Users.findByIdAndUpdate(id, {
-//       username,
-//       campus,
-//       course
-//     });
-//     return res.json({ status: "Edit Profile" });
-//   } catch (error) {
-//     return res.status(401).json({ status: "Not Found" });
-//   }
-// });
+/* EDIT */
+router.post("/edit", isLoggedIn(), async (req, res, next) => {
+  try {
+    const id = req.user._id;
+    const { name, email, dogName, race } = req.body;
+    await Users.findByIdAndUpdate(id, {
+      name,
+      email,
+      dogName,
+      race
+    });
+    return res.json({ status: "Edit Profile" });
+  } catch (error) {
+    return res.status(401).json({ status: "Not Found" });
+  }
+});
 
-// // WHOAMI
-// router.post("/whoami", (req, res, next) => {
-//   if (req.user)
-//     return res.json(
-//       _.pick(req.user, [
-//         "username",
-//         "_id",
-//         "campus",
-//         "course",
-//         "createdAt",
-//         "updatedAt"
-//       ])
-//     );
-//   else return res.status(401).json({ status: "No user session present" });
-// });
+// WHOAMI
+router.post("/whoami", (req, res, next) => {
+  if (req.user)
+    return res.json(
+      _.pick(req.user, [
+        "username",
+        "_id",
+        "email",
+        "dogName",
+        "race",
+        "createdAt",
+        "updatedAt"
+      ])
+    );
+  else return res.status(401).json({ status: "No user session present" });
+});
 
 module.exports = router;
