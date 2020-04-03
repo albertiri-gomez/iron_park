@@ -80,4 +80,7 @@ app.use("/", index);
 const auth = require("./routes/auth");
 app.use("/auth", auth);
 
+const park = require("./routes/parkRoutes");
+app.use("/park", park);
+
 module.exports = app;

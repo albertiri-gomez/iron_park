@@ -6,14 +6,15 @@ const User = require("../models/User");
 const Park = require("../models/Park");
 const Review = require("../models/Reviews");
 const mongoose = require("mongoose");
+const Utils = require("../lib/utils");
 
 // new review
 router.post("/review", async (req, res, next) => {
   try {
     const { starts = 0, comment } = req.body;
     await Review.create({
-      park: mongoose.Types.ObjectId(req.body.park),
       user: mongoose.Types.ObjectId(req.user.id),
+      park: mongoose.Types.ObjectId(req.body.park),
       rates: {
         starts
       },
@@ -25,7 +26,7 @@ router.post("/review", async (req, res, next) => {
   }
 });
 
-// API that serves the name of all the temples
+// API that serves the name of all the park
 router.post("/get-names", async (req, res, next) => {
   try {
     const parks = await Park.aggregate([
@@ -54,7 +55,7 @@ router.get("/:id", (req, res, next) => {
           createdAt: -1
         });
       const savedFavorite = isparkFavorite(req.user, park._id);
-      return res.render("park", {
+      return res.json("park", {
         park,
         reviews,
         savedFavorite

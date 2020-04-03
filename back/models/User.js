@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { hashPassword } = require("../lib/hashing");
+
 const SALT_WORK_FACTOR = 10;
 const IMAGE_URL = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg)/g;
 const EMAIL_PATTERN = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

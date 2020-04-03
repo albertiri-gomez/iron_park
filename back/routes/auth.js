@@ -28,6 +28,7 @@ router.post("/signup", async (req, res, next) => {
         race,
         user: newUser._id
       });
+      console.log(newDog);
     }
     // Directly login user
     req.logIn(newUser, err => {
@@ -78,15 +79,13 @@ router.post("/logout", isLoggedIn(), async (req, res, next) => {
 });
 
 /* EDIT */
-router.post("/edit", isLoggedIn(), async (req, res, next) => {
+router.post("auth/edit", isLoggedIn(), async (req, res, next) => {
   try {
     const id = req.user._id;
-    const { name, email, dogName, race } = req.body;
+    const { name, email } = req.body;
     await Users.findByIdAndUpdate(id, {
       name,
-      email,
-      dogName,
-      race
+      email
     });
     return res.json({ status: "Edit Profile" });
   } catch (error) {
