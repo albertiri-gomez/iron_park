@@ -6,19 +6,21 @@ const parkSchema = new mongoose.Schema(
       type: String,
       required: "Name is required"
     },
-    transport: {
-      type: String
+    // owner: { type: mongoose.Types.ObjectId, ref: "User" },
+    address: {
+      locality: String,
+      postalCode: String,
+      streetAddress: String
     },
     description: {
       type: String
     },
-    owner: { type: mongoose.Types.ObjectId, ref: "User" },
     location: {
-      type: { type: String, default: "Point" },
-      coordinates: {
-        type: [Number],
-        required: false
-      }
+      latitude: Number,
+      longitude: Number
+    },
+    image: {
+      type: String
     }
   },
   {
