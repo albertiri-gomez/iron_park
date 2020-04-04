@@ -13,6 +13,9 @@ const mettingSchema = new Schema(
       type: Number,
       default: 0
     },
+    description: {
+      type: String
+    },
     time: {
       type: Number
     },

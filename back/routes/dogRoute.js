@@ -5,10 +5,11 @@ const ensureLogin = require("connect-ensure-login");
 const User = require("../models/User");
 const Park = require("../models/Park");
 const Dog = require("../models/Dog");
-const mongoose = require("mongoose");
-const uploader = require("../cloudinary/cloudinary.config");
+const Metting = require("../models/Metting");
 
-router.post("/dog", async (req, res, next) => {
+const mongoose = require("mongoose");
+
+router.post("/meeting", async (req, res, next) => {
   try {
     const { comment, description } = req.body;
     const newDog = await Dog.create({

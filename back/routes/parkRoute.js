@@ -6,7 +6,7 @@ const User = require("../models/User");
 const Park = require("../models/Park");
 const Review = require("../models/Reviews");
 const mongoose = require("mongoose");
-const Utils = require("../lib/utils");
+const isparkFavorite = require("../lib/utils/isParkFavorite");
 
 // new review
 router.post("/review", async (req, res, next) => {
