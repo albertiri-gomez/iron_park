@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const dogSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User" },
+    park: { type: Schema.Types.ObjectId, ref: "Park" },
+
     dogName: {
       type: String,
       require: true
@@ -15,8 +17,6 @@ const dogSchema = new Schema(
     description: {
       type: String
     },
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-
     image: {
       type: String
     }

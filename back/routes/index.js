@@ -8,12 +8,14 @@ router.get("/", (req, res, next) => {
 });
 
 const auth = require("./auth.Route");
-// const park = require("./parkRoute");
+const park = require("./park.Route");
+const dog = require("./dog.Route");
 
-router.use("/auth.Routes", auth);
+router.use("/auth", auth);
 
 router.use(isLoggedIn());
 
-// router.use("/parkRoute", park);
+router.use("/park", park);
+router.use("/dog", dog);
 
 module.exports = router;

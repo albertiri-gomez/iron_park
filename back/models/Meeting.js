@@ -1,7 +1,6 @@
 const moongose = require("moongose");
 
-const Schema = mongoose.Schema;
-const mettingSchema = new Schema(
+const mettingSchema = new mongoose.Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User" },
     park: { type: Schema.Types.ObjectId, ref: "Park" },
