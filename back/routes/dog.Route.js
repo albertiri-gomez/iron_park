@@ -9,7 +9,7 @@ const Metting = require("../models/Metting");
 
 const mongoose = require("mongoose");
 
-router.post("/meeting", async (req, res, next) => {
+router.post("/dog", async (req, res, next) => {
   try {
     const { comment, description } = req.body;
     const newDog = await Dog.create({

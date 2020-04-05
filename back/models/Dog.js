@@ -15,9 +15,8 @@ const dogSchema = new Schema(
     description: {
       type: String
     },
-    comment: {
-      type: String
-    },
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+
     image: {
       type: String
     }

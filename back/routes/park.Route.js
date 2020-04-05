@@ -4,50 +4,33 @@ const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const ensureLogin = require("connect-ensure-login");
 const User = require("../models/User");
 const Park = require("../models/Park");
-const Review = require("../models/Reviews");
+const Comment = require("../models/Comment");
 const mongoose = require("mongoose");
 const isparkFavorite = require("../lib/utils/isParkFavorite");
 
-// new review
-router.post("/review", async (req, res, next) => {
-  try {
-    const { starts = 0, comment } = req.body;
-    await Review.create({
-      user: mongoose.Types.ObjectId(req.user.id),
-      park: mongoose.Types.ObjectId(req.body.park),
-      rates: {
-        starts
-      },
-      comment
-    });
-    return res.json(`${req.body.park}`);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// API that serves the name of all the park
-router.post("/get-names", async (req, res, next) => {
-  try {
-    const parks = await Park.aggregate([
-      {
-        $project: {
-          _id: 0,
-          name: 1
-        }
-      }
-    ]);
-    return res.json(parks);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// // new review
+// router.post("/review", async (req, res, next) => {
+//   try {
+//     const { starts = 0, comment } = req.body;
+//     await Review.create({
+//       user: mongoose.Types.ObjectId(req.user.id),
+//       park: mongoose.Types.ObjectId(req.body.park),
+//       rates: {
+//         starts
+//       },
+//       comment
+//     });
+//     return res.json(`${req.body.park}`);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // park details
 router.get("/:id", (req, res, next) => {
   Park.findById(req.params.id)
     .then(async park => {
-      const reviews = await Review.find({
+      const comment = await Comment.find({
         park
       })
         .populate("user")
@@ -57,7 +40,7 @@ router.get("/:id", (req, res, next) => {
       const savedFavorite = isparkFavorite(req.user, park._id);
       return res.json("park", {
         park,
-        reviews,
+        comment,
         savedFavorite
       });
     })

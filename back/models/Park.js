@@ -6,7 +6,6 @@ const parkSchema = new mongoose.Schema(
       type: String,
       required: "Name is required"
     },
-    // owner: { type: mongoose.Types.ObjectId, ref: "User" },
     address: {
       locality: String,
       postalCode: String,
@@ -21,7 +20,9 @@ const parkSchema = new mongoose.Schema(
     },
     image: {
       type: String
-    }
+    },
+    comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
+    user: { type: mongoose.Types.ObjectId, ref: "User" }
   },
   {
     timestamps: true,

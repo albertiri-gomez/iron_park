@@ -4,63 +4,55 @@ const User = require("../models/User");
 const Dog = require("../models/Dog");
 const _ = require("lodash");
 const passport = require("passport");
-const { hashPassword, checkHashed } = require("../lib/hashing");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 // SIGNUP
-router.post("/signup", async (req, res, next) => {
-  const { name, email, password, hasDog, dogName, race } = req.body;
-
-  console.log(name, password);
-
+router.post("/signup", isLoggedOut(), async (req, res, next) => {
+  const { username, email, password, hasDog, dogName } = req.body;
+  // console.log(username, password);
   // Create the user
-  const existingUser = await User.findOne({ name, email });
+  const existingUser = await User.findOne({ username });
   if (!existingUser) {
     const newUser = await User.create({
-      name,
+      username,
       email,
       password
     });
-    console.log(newUser);
+    // console.log(newUser);
     if (hasDog === true) {
       const newDog = await Dog.create({
         dogName,
-        race,
         user: newUser._id
       });
       console.log(newDog);
     }
     // Directly login user
     req.logIn(newUser, err => {
-      res.json(
-        _.pick(req.user, ["name", "email", "_id", "createdAt", "updatedAt"])
-      );
+      res.json(_.pick(req.user, ["username", "_id", "createdAt", "updatedAt"]));
     });
-    console.log(name, "register");
+    console.log(username, "register");
   } else {
     res.json({ status: "User Exist" });
   }
 });
 
-// LOGIN
+//LOGIN
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
       console.log(err);
       return res.json({ status: 500, message: "Authentication Error" });
     }
-
+    console.log(user);
     if (!user) {
       return res.json({ status: 401, message: failureDetails.message });
     }
-
     req.login(user, err => {
       if (err) {
         return res.status(500).json({ message: "Session not saved" });
       }
-
       return res.json(
-        _.pick(req.user, ["name", "email", "_id", "createdAt", "updatedAt"])
+        _.pick(req.user, ["username", "_id", "createdAt", "updatedAt"])
       );
     });
   })(req, res, next);
@@ -78,14 +70,22 @@ router.post("/logout", isLoggedIn(), async (req, res, next) => {
   }
 });
 
+/* EDIT ONE */
+router.get("/:id", (req, res, next) => {
+  const { id } = req.params;
+  User.findOne({ _id: id })
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => res.status(500).json(err));
+});
+
 /* EDIT */
-router.post("auth/edit", isLoggedIn(), async (req, res, next) => {
+router.put("/:id", isLoggedIn(), async (req, res, next) => {
   try {
-    const id = req.user._id;
-    const { name, email } = req.body;
-    await Users.findByIdAndUpdate(id, {
-      name,
-      email
+    const { id } = req.params;
+    await User.findOneAndUpdate({ _id: id }, req.body, {
+      new: true
     });
     return res.json({ status: "Edit Profile" });
   } catch (error) {

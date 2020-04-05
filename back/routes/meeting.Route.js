@@ -11,8 +11,8 @@ router.post("/meeting", async (req, res, next) => {
   try {
     const { name, participants, time, date, description } = req.body;
     const newMeeting = await Meeting.create({
-      user: mongoose.Types.ObjectId(req.user.id),
-      park: mongoose.Types.ObjectId(req.body.park),
+      user: req.user.id,
+      park: req.body.park,
       name,
       participants,
       time,
