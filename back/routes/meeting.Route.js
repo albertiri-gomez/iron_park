@@ -4,8 +4,20 @@ const { isLoggedIn } = require("../lib/isLoggedMiddleware");
 const Meeting = require("../models/Meeting");
 const mongoose = require("mongoose");
 
+//get
+router.get("/", isLoggedIn, (req, res, next) => {
+  Meeting.find()
+    .populate("user")
+    .populate("park")
+    .populate({ path: "comments", populate: { path: "author" } })
+    .then(metting => {
+      res.json(metting);
+    })
+    .catch(err => res.status(500).json(err));
+});
+
 /*CREATE*/
-router.post("/meeting", isLoggedIn(), async (req, res, next) => {
+router.post("/", isLoggedIn(), async (req, res, next) => {
   try {
     const { name, participants, time, date, description } = req.body;
     const newMeeting = await Meeting.create({
@@ -23,34 +35,23 @@ router.post("/meeting", isLoggedIn(), async (req, res, next) => {
   }
 });
 
-//get
-router.get("/", isLoggedIn, (req, res, next) => {
-  Meeting.find()
-    .populate("user")
-    .populate({ path: "comments", populate: { path: "author" } })
-    .then(metting => {
-      res.json(metting);
-    })
-    .catch(err => res.status(500).json(err));
-});
-
 /* EDIT */
 router.put("/:id", isLoggedIn(), async (req, res, next) => {
   try {
     const { id } = req.params;
-    await User.findOneAndUpdate({ _id: id }, req.body, {
+    await Meeting.findOneAndUpdate({ _id: id }, req.body, {
       new: true
     });
-    return res.json({ status: "Edit Dog" });
+    return res.json({ status: "Edit meeting" });
   } catch (error) {
     return res.status(401).json({ status: "Not Found" });
   }
 });
 
-//delete
-router.delete("/:id", (req, res, next) => {
+// DELETE
+router.delete("/:id", isLoggedIn, (req, res, next) => {
   const { id } = req.params;
-  Movie.findOneAndRemove({ _id: id })
+  Meeting.findOneAndRemove({ _id: id })
     .then(() => res.json({ message: "Removed succesfully" }))
     .catch(err => res.status(500).json(err));
 });

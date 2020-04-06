@@ -10,6 +10,7 @@ router.get("/", (req, res, next) => {
 const auth = require("./auth.Route");
 const park = require("./park.Route");
 const dog = require("./dog.Route");
+const meeting = require("./meeting.Route");
 
 router.use("/auth", auth);
 
@@ -17,5 +18,6 @@ router.use(isLoggedIn());
 
 router.use("/park", park);
 router.use("/dog", dog);
+router.use("/meeting", meeting);
 
 module.exports = router;

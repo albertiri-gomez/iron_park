@@ -1,9 +1,9 @@
-const moongose = require("moongose");
+const mongoose = require("mongoose");
 
 const mettingSchema = new mongoose.Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    park: { type: Schema.Types.ObjectId, ref: "Park" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    park: { type: mongoose.Types.ObjectId, ref: "Park" },
     name: {
       type: String,
       require: true
@@ -16,10 +16,11 @@ const mettingSchema = new mongoose.Schema(
       type: String
     },
     time: {
-      type: Number
+      type: Date
+      // default: Date.now
     },
     date: {
-      type: Date
+      type: Number
     }
   },
   {
@@ -34,6 +35,6 @@ const mettingSchema = new mongoose.Schema(
   }
 );
 
-const Metting = mongoose.model("Metting", mettingSchema);
+const Meetting = mongoose.model("Meeting", mettingSchema);
 
-module.exports = Metting;
+module.exports = Meetting;

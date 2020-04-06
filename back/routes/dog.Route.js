@@ -43,7 +43,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", isLoggedIn(), async (req, res, next) => {
   try {
     const { id } = req.params;
-    await User.findOneAndUpdate({ _id: id }, req.body, {
+    await Dog.findOneAndUpdate({ _id: id }, req.body, {
       new: true
     });
     return res.json({ status: "Edit Dog" });
