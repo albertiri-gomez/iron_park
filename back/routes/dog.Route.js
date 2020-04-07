@@ -5,21 +5,19 @@ const Dog = require("../models/Dog");
 const mongoose = require("mongoose");
 
 // router.get("/", isLoggedIn, async (req, res, next) => {
-//   await Dog.find()
-//     .populate("user")
-//     .populate({ path: "comments", populate: { path: "author" } });
+//   await Dog.find().populate("user");
+//   // .populate({ path: "comments", populate: { path: "author" } });
 //   return res.json({ status: "Edit Dog" });
 // });
 
 //get dog
-router.get("/", isLoggedIn, (req, res, next) => {
+router.get("/", isLoggedIn(), (req, res, next) => {
   Dog.find()
     .populate("user")
-    .populate({ path: "comments", populate: { path: "author" } })
-    .then(dog => {
+    .then((dog) => {
       res.json(dog);
     })
-    .catch(err => res.status(500).json(err));
+    .catch((err) => res.status(500).json(err));
 });
 
 //create dog
@@ -31,7 +29,7 @@ router.post("/", async (req, res, next) => {
       dogName,
       race,
       description,
-      image
+      image,
     });
     return res.json(newDog);
   } catch (error) {
@@ -44,7 +42,7 @@ router.put("/:id", isLoggedIn(), async (req, res, next) => {
   try {
     const { id } = req.params;
     await Dog.findOneAndUpdate({ _id: id }, req.body, {
-      new: true
+      new: true,
     });
     return res.json({ status: "Edit Dog" });
   } catch (error) {

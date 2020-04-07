@@ -4,7 +4,7 @@ const mettingSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: "User" },
     park: { type: mongoose.Types.ObjectId, ref: "Park" },
-    name: {
+    nameMeeting: {
       type: String,
       require: true
     },
@@ -16,11 +16,11 @@ const mettingSchema = new mongoose.Schema(
       type: String
     },
     time: {
-      type: Date
-      // default: Date.now
+      type: String
     },
     date: {
-      type: Number
+      type: Date,
+      default: Date.now
     }
   },
   {

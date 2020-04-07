@@ -16,8 +16,8 @@ router.use("/auth", auth);
 
 router.use(isLoggedIn());
 
-router.use("/park", park);
-router.use("/dog", dog);
-router.use("/meeting", meeting);
+router.use("/parks", park);
+router.use("/dogs", dog);
+router.use("/meetings", meeting);
 
 module.exports = router;
