@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { hashPassword } = require("../lib/hashing");
+
 const SALT_WORK_FACTOR = 10;
 const IMAGE_URL = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg)/g;
 const EMAIL_PATTERN = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: "Name is required"
     },
