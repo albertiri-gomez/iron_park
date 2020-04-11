@@ -49,11 +49,12 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const doEdit = async ({ username, email }) => {
+export const doEdit = async ({ username, email, password }) => {
   console.log("edit!");
-  const res = await api.post("/edit", {
+  const res = await api.put("/:id", {
     username,
+    password,
     email,
   });
-  console.log(" edit", res);
+  console.log("edit", res);
 };
