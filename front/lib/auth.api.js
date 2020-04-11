@@ -5,12 +5,19 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const doSignup = async ({ username, password, campus, course }) => {
+export const doSignup = async ({
+  username,
+  password,
+  email,
+  dogName,
+  hasDog,
+}) => {
   const res = await api.post("/signup", {
     username,
     password,
-    campus,
-    course,
+    email,
+    hasDog,
+    dogName,
   });
   console.log("Respuesta del server", res.data);
   console.log("Usuario Creado");
@@ -42,12 +49,11 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const doEdit = async ({ username, campus, course }) => {
+export const doEdit = async ({ username, email }) => {
   console.log("edit!");
   const res = await api.post("/edit", {
     username,
-    campus,
-    course,
+    email,
   });
   console.log(" edit", res);
 };

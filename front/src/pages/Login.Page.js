@@ -12,20 +12,20 @@ export const LoginPage = withRouter(({ history }) => {
     mode: "onBlur",
     defaultValues: {
       username: "",
-      password: ""
-    }
+      password: "",
+    },
   });
 
   const { register, handleSubmit, errors } = methods;
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     console.log("Data is");
     console.log("data", data);
     const responseServer = await doLogin(data);
 
     if (!responseServer.status) {
       setUser(data);
-      history.push("/profile");
+      history.push("/park");
     } else {
       console.log(`fallo ${responseServer.message}`);
       return history.push("/login");

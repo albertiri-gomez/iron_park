@@ -5,6 +5,7 @@ const Dog = require("../models/Dog");
 const _ = require("lodash");
 const passport = require("passport");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
+const { hashPassword } = require("../lib/hashing");
 
 // SIGNUP
 router.post("/signup", isLoggedOut(), async (req, res, next) => {
@@ -16,18 +17,18 @@ router.post("/signup", isLoggedOut(), async (req, res, next) => {
     const newUser = await User.create({
       username,
       email,
-      password
+      password,
     });
     // console.log(newUser);
     if (hasDog === true) {
       const newDog = await Dog.create({
         dogName,
-        user: newUser._id
+        user: newUser._id,
       });
       console.log(newDog);
     }
     // Directly login user
-    req.logIn(newUser, err => {
+    req.logIn(newUser, (err) => {
       res.json(_.pick(req.user, ["username", "_id", "createdAt", "updatedAt"]));
     });
     console.log(username, "register");
@@ -47,7 +48,7 @@ router.post("/login", (req, res, next) => {
     if (!user) {
       return res.json({ status: 401, message: failureDetails.message });
     }
-    req.login(user, err => {
+    req.login(user, (err) => {
       if (err) {
         return res.status(500).json({ message: "Session not saved" });
       }
@@ -74,18 +75,21 @@ router.post("/logout", isLoggedIn(), async (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
   User.findOne({ _id: id })
-    .then(user => {
+    .then((user) => {
       res.json(user);
     })
-    .catch(err => res.status(500).json(err));
+    .catch((err) => res.status(500).json(err));
 });
 
 /* EDIT */
-router.put("/:id", isLoggedIn(), async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await User.findOneAndUpdate({ _id: id }, req.body, {
-      new: true
+    const id = req.user._id;
+    const { username, email, password } = req.body;
+    await User.findByIdAndUpdate(id, {
+      username,
+      email,
+      password: hashPassword(password),
     });
     return res.json({ status: "Edit Profile" });
   } catch (error) {
@@ -104,7 +108,7 @@ router.post("/whoami", (req, res, next) => {
         "dogName",
         "race",
         "createdAt",
-        "updatedAt"
+        "updatedAt",
       ])
     );
   else return res.status(401).json({ status: "No user session present" });

@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Home = () => (
+export const Index = () => (
   <Container>
     <Link to="login">LOG IN</Link>
     <Link to="signUp">SING UP</Link>

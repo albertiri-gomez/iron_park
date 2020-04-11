@@ -8,7 +8,7 @@ import { InputBox } from "../components/Input";
 export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
 
-  const onClickLogout = async e => {
+  const onClickLogout = async (e) => {
     e.preventDefault();
     await doLogout();
     setUser(null);
@@ -20,18 +20,17 @@ export const ProfilePage = withRouter(({ history }) => {
         mode: "onBlur",
         defaultValues: {
           username: user?.username,
-          campus: user?.campus,
-          course: user?.course
-        }
+          email: user?.email,
+        },
       })
     : useForm({
-        mode: "onBlur"
+        mode: "onBlur",
       });
 
   console.log(user);
   const { register, handleSubmit, errors } = methods;
 
-  const onEdit = async data => {
+  const onEdit = async (data) => {
     console.log("data", data);
     await doEdit(data);
     setUser(data);
@@ -58,23 +57,15 @@ export const ProfilePage = withRouter(({ history }) => {
             />
           </div>
           <div>
-            <label>Campus</label>
-            <InputBox
-              // className={hasError(errors, "campus")}
-              name="campus"
-              ref={register({ required: true })}
-            />
-          </div>
-          <div>
-            <label>Course</label>
+            <label>Email</label>
             <InputBox
               // className={hasError(errors, "course")}
-              name="course"
+              name="email"
               ref={register({ required: true })}
             />
           </div>
           <button type="submit">Editar Profile</button>
-          <button onClick={e => onClickLogout(e)}>Logout</button>
+          <button onClick={(e) => onClickLogout(e)}>Logout</button>
         </form>
       </>
     </FormContext>

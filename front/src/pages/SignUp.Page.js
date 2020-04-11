@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { InputBox } from "../components/Input";
 import { doSignup } from "../../lib/auth.api";
 import { ApiContext } from "../../context/ApiContext";
+import { Button_dog } from "../components/Button_dog";
 
 export const SignUpPage = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
@@ -13,14 +14,14 @@ export const SignUpPage = withRouter(({ history }) => {
     defaultValues: {
       username: "",
       password: "",
-      campus: "",
-      course: ""
-    }
+      dogName: "",
+      hasDog: true,
+    },
   });
 
   const { register, handleSubmit, errors } = methods;
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     console.log("data", data);
 
     const responseServer = await doSignup(data);
@@ -30,6 +31,7 @@ export const SignUpPage = withRouter(({ history }) => {
     }
 
     setUser(data);
+
     history.push("/login");
   };
 
@@ -48,6 +50,14 @@ export const SignUpPage = withRouter(({ history }) => {
             />
           </div>
           <div>
+            <div>
+              <label>Email</label>
+              <InputBox
+                // className={hasError(errors, "username")}
+                name="email"
+                ref={register({ required: true })}
+              />
+            </div>
             <label>Password</label>
             <InputBox
               // className={hasError(errors, "password")}
@@ -55,22 +65,16 @@ export const SignUpPage = withRouter(({ history }) => {
               ref={register({ required: true })}
             />
           </div>
-          <div>
-            <label>Campus</label>
+          <Button_dog></Button_dog>
+          {/* <div>
+            <label>dogName</label>
             <InputBox
-              // className={hasError(errors, "campus")}
-              name="campus"
+              // className={hasError(errors, "username")}
+              name="dogName"
               ref={register({ required: true })}
             />
-          </div>
-          <div>
-            <label>Course</label>
-            <InputBox
-              // className={hasError(errors, "course")}
-              name="course"
-              ref={register({ required: true })}
-            />
-          </div>
+          </div> */}
+          {/* <Button_dog /> */}
           <button type="submit">Login</button>
         </form>
       </>
