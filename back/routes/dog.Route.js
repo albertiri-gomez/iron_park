@@ -50,6 +50,22 @@ router.put("/:id", isLoggedIn(), async (req, res, next) => {
   }
 });
 
+router.post("/whoami", (req, res, next) => {
+  if (req.user)
+    return res.json(
+      _.pick(req.user, [
+        "image",
+        "_id",
+        "description",
+        "dogName",
+        "race",
+        "createdAt",
+        "updatedAt",
+      ])
+    );
+  else return res.status(401).json({ status: "No user session present" });
+});
+
 // // Upload file
 // router.post("/dog/upload", async (req, res, next) => {
 //   try {
