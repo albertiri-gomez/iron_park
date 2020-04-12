@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -9,10 +10,19 @@ export const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/park">PARK</Nav.Link>
-          <Nav.Link href="/profile">Profile</Nav.Link>
-          <Nav.Link href="/dog">Dog</Nav.Link>
-          <Nav.Link href="/auth/profile">Metting</Nav.Link>
+          <Nav.Link as="div">
+            <Link to="/park">PARK</Link>
+          </Nav.Link>
+          <Nav.Link as="div">
+            <Link to="/profile">Profile</Link>
+          </Nav.Link>
+          <Nav.Link as="div">
+            <Link to="/dog">Dog</Link>
+          </Nav.Link>
+          <Nav.Link as="div">
+            <Link to="/meeting">Metting</Link>
+          </Nav.Link>
+
           {/* <Nav.Link href="/" onClick={handleLogout}>
             Logout
           </Nav.Link> */}

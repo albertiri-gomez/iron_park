@@ -1,4 +1,4 @@
-equire("dotenv").config();
+require("dotenv").config();
 const Park = require("../models/Park");
 const axios = require("axios");
 const mongoose = require("mongoose");
@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const getImagesPark = async () => {
   await mongoose.connect(process.env.DBURL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   });
 
   // get all the parks from the data base
@@ -25,8 +25,8 @@ const getImagesPark = async () => {
           searchType: "image",
           fileType: "jpg",
           cr: true,
-          alt: "json"
-        }
+          alt: "json",
+        },
       });
       park.image = response.data.items[0].link;
       await park.save();

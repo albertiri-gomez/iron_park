@@ -8,6 +8,10 @@ import { ParkPages } from "./pages/Park.pages";
 import { ApiContextProvider } from "../context/ApiContext";
 import { Layout } from "./components/Layouts/Layout";
 import { DogPages } from "./pages/Dog.Pages";
+import { DogsCreate } from "./pages/Dog.Create.Pages";
+import { DogsEdit } from "./pages/Dog.Edit.Pages";
+import { MeetingsPages } from "./pages/Meetings.Pages";
+import { MeetingsCreate } from "./pages/Meetings.Create.Pages";
 
 export const App = () => (
   <Router>
@@ -20,6 +24,10 @@ export const App = () => (
           <Route path="/profile" component={ProfilePage} />
           <Route path="/park" component={ParkPages} />
           <Route path="/dog" component={DogPages} />
+          <Route path="/create_dog" component={DogsCreate} />
+          <Route path="/edit_dog" component={DogsEdit} />
+          <Route path="/meeting" component={MeetingsPages} />
+          <Route path="/create_meeting" component={MeetingsCreate} />
         </Layout>
       </Switch>
     </ApiContextProvider>

@@ -6,7 +6,13 @@ const api = axios.create({
 });
 
 export const getDogs = async ({ dogName, race, description, image, user }) => {
-  const res = await api.get("/", { dogName, race, description, image, user });
+  const res = await api.get("/", {
+    dogName,
+    race,
+    description,
+    image,
+    user,
+  });
   console.log("Respuesta del server", res.data);
   console.log("perros Mostrados");
   return res.data;
