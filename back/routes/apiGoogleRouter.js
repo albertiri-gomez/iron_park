@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
       next(error);
     } else {
       res.status(200).json({
-        parks: parkLocDB
+        parks: parkLocDB,
       });
     }
   });
@@ -20,14 +20,14 @@ router.get("/:id", (req, res, next) => {
   let parkId = req.params.id;
   Park.findOne(
     {
-      _id: parkId
+      _id: parkId,
     },
     (error, oneParkLocDB) => {
       if (error) {
         next(error);
       } else {
         res.status(200).json({
-          park: oneParkLocDB
+          park: oneParkLocDB,
         });
       }
     }

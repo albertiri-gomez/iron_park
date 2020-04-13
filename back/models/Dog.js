@@ -9,17 +9,17 @@ const dogSchema = new Schema(
 
     dogName: {
       type: String,
-      require: true
+      require: true,
     },
     race: {
-      type: String
+      type: String,
     },
     description: {
-      type: String
+      type: String,
     },
     image: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -30,8 +30,8 @@ const dogSchema = new Schema(
         delete ret.updatedAt;
         delete ret.__v;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 

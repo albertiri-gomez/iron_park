@@ -17,7 +17,8 @@ const getImagesPark = async () => {
   for (park of parks) {
     try {
       const response = await axios({
-        url: "https://www.googleapis.com/customsearch/v1",
+        url:
+          "https://www.googleapis.com/customsearch/v1/AIzaSyAit0JnSQL2OurAVpFdie_QrgMy5wzzEfo",
         params: {
           key: process.env.GOOGLE_KEY,
           cx: process.env.GOOGLE_CX,
