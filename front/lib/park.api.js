@@ -1,30 +1,35 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/park",
+  baseURL: "http://localhost:3000/parks",
   withCredentials: true,
 });
 
-export const getParks = async ({
-  name,
-  address,
-  description,
-  location,
-  image,
-  comments,
-  user,
-}) => {
-  const res = await api.get("/", {
-    name,
-    address,
-    description,
-    location,
-    image,
-    comments,
-    user,
-  });
-  console.log("Respuesta del server", res.data);
-  console.log("parques Mostrados");
+// export const getParks = async ({
+//   name,
+//   address,
+//   description,
+//   location,
+//   image,
+//   comments,
+//   user,
+// }) => {
+//   const res = await api.get("/", {
+//     name,
+//     address,
+//     description,
+//     location,
+//     image,
+//     comments,
+//     user,
+//   });
+//   console.log("Respuesta del server", res.data);
+//   console.log("parques Mostrados");
+//   return res.data;
+// };
+export const getParks = async () => {
+  const res = await api.get("/");
+  console.log(res.data);
   return res.data;
 };
 

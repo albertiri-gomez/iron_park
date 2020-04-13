@@ -4,25 +4,25 @@ const parkSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: "Name is required"
+      required: "Name is required",
     },
     address: {
       locality: String,
       postalCode: String,
-      streetAddress: String
+      streetAddress: String,
     },
     description: {
-      type: String
+      type: String,
     },
     location: {
       latitude: Number,
-      longitude: Number
+      longitude: Number,
     },
     image: {
-      type: String
+      type: String,
     },
     comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
-    user: { type: mongoose.Types.ObjectId, ref: "User" }
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
@@ -33,8 +33,8 @@ const parkSchema = new mongoose.Schema(
         delete ret.updatedAt;
         delete ret.__v;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 

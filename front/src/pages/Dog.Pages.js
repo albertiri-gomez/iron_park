@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { ApiContext } from "../../context/ApiContext";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { getDogs } from "../../lib/dog.api";
+import { Nav } from "react-bootstrap";
 
 export const DogPages = (props) => {
-  const { dogs, setDogs } = useState([]);
+  const [dogs, setDogs] = useState([]);
   console.log();
 
   useEffect(() => {
-    getDogs(props).then((dog) => setDogs(dog));
+    getDogs().then((dog) => setDogs(dog));
   }, []);
   // const { user, setUser } = useContext(ApiContext);
 
@@ -23,7 +24,7 @@ export const DogPages = (props) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        {dogs.map((dog) => {
+        {dogs?.map((dog) => {
           return (
             <>
               {/* <Card.Img variant="top" src={dogs.image} /> */}
