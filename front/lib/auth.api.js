@@ -1,4 +1,35 @@
 import axios from "axios";
+import React, { useContext } from "react";
+
+export const UserContext = React.createContext();
+
+export const useUser = () => {
+  const userState = useContext(UserContext);
+  return userState.user;
+};
+
+export const useUserSetter = () => {
+  const userState = useContext(UserContext);
+  return userState.setUser;
+};
+
+export const useUserIsLoading = () => {
+  const userState = useContext(UserContext);
+  return userState.loading;
+};
+
+export const useUserLogout = () => {
+  const userState = useContext(UserContext);
+
+  // NOTE: This returned function is "handleLogout"
+  return async () => {
+    console.log("log out!");
+    // Remove user from React User State context
+    userState.setUser(null);
+    // Remove cookie from backend and frontend
+    return doLogout();
+  };
+};
 
 const api = axios.create({
   baseURL: "http://localhost:3000/auth",
@@ -42,7 +73,7 @@ export const doLogout = async () => {
   console.log(" logout", res);
 };
 
-export const whoUser = async () => {
+export const whoami = async () => {
   console.log("whoUser");
   const res = await api.post("/whoami");
   console.log("whami", res.data);

@@ -12,8 +12,9 @@ import { DogsCreate } from "./pages/Dog.Create.Pages";
 import { DogsEdit } from "./pages/Dog.Edit.Pages";
 import { MeetingsPages } from "./pages/Meetings.Pages";
 import { MeetingsCreate } from "./pages/Meetings.Create.Pages";
+import { withAuthentication } from "../lib/withAuthentication";
 
-export const App = () => (
+export const App = withAuthentication(() => (
   <Router>
     <ApiContextProvider>
       <Switch>
@@ -32,4 +33,4 @@ export const App = () => (
       </Switch>
     </ApiContextProvider>
   </Router>
-);
+));

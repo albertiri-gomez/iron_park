@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { whoUser } from "../lib/auth.api";
+import { whoami } from "../lib/auth.api";
 import { getDogs } from "../lib/dog.api";
 
 export const ApiContext = createContext();
@@ -11,7 +11,7 @@ export const ApiContextProvider = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const user = await whoUser();
+        const user = await whoami();
         console.log("is logged", user);
         setUser(user);
         getDogs();
