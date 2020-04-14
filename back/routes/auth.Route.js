@@ -8,7 +8,7 @@ const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const { hashPassword } = require("../lib/hashing");
 
 // SIGNUP
-router.post("/signup", isLoggedOut(), async (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
   const { username, email, password, hasDog, dogName } = req.body;
   // console.log(username, password);
   // Create the user

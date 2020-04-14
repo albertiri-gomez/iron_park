@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
+import { getMeeting } from "../../lib/meeting.api";
 import { ApiContext } from "../../context/ApiContext";
 import { withRouter, Link } from "react-router-dom";
-import { getDogs } from "../../lib/dog.api";
 import { Nav } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export const DogPages = (props) => {
-  const [dogs, setDogs] = useState([]);
-  console.log();
+export const MeetingsPages = (props) => {
+  const [meetings, setMeeting] = useState([]);
 
   useEffect(() => {
-    getDogs().then((dog) => setDogs(dog));
+    getMeeting(props).then((meeting) => setMeeting(meeting));
   }, []);
-  // const { user, setUser } = useContext(ApiContext);
-
-  // const onClick = async (e) => {
-  //   e.preventDefault();
-  //   await getDogs();
-  //   setUser(null);
-  //   history.push("/");
-  // };
-
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        {dogs?.map((dog) => {
+        {meetings.map((meeting) => {
           return (
             <>
               {/* <Card.Img variant="top" src={dogs.image} /> */}
               <Card.Body>
-                <Card.Title>{dog.dogName}</Card.Title>
-                <Card.Text>{dog.description}</Card.Text>
-                <Card.Text>{dog.race}</Card.Text>
+                <Card.Title>{meeting.nameMeeting}</Card.Title>
+                <Card.Text>{meeting.description}</Card.Text>
+                <Card.Text>{meeting.date}</Card.Text>
                 {/* <Button variant="primary">Go somewhere</Button> */}
               </Card.Body>
             </>
@@ -41,12 +32,10 @@ export const DogPages = (props) => {
       <Nav defaultActiveKey="/home" as="ul">
         <Nav.Item as="li">
           <Nav.Link as="div">
-            <Link to="/create_dog">Crear Peroo</Link>
+            <Link to="/create_meeting">Crear reunion</Link>
           </Nav.Link>
         </Nav.Item>
       </Nav>
     </>
   );
 };
-
-// dogName, race, description, image

@@ -4,10 +4,10 @@ const { isLoggedIn } = require("../lib/isLoggedMiddleware");
 const Park = require("../models/Park");
 const isparkFavorite = require("../lib/utils/isParkFavorite");
 
-router.get("/", isLoggedIn, (req, res, next) => {
+router.get("/", isLoggedIn(), (req, res, next) => {
   Park.find()
     .populate("user")
-    .populate({ path: "comments", populate: { path: "author" } })
+    .populate({ path: "comment", populate: { path: "author" } })
     .then((park) => {
       res.json(park);
     })

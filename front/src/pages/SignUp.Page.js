@@ -23,8 +23,14 @@ export const SignUpPage = withRouter(({ history }) => {
 
   const onSubmit = async (data) => {
     console.log("data", data);
-
-    const responseServer = await doSignup(data);
+    // if (data.dogName === "")
+    // {
+    //   return false
+    // }
+    const responseServer = await doSignup({
+      ...data,
+      hasDog: data.dogName == "" ? false : true,
+    });
 
     if (responseServer.status) {
       return history.push("/login");
@@ -65,7 +71,7 @@ export const SignUpPage = withRouter(({ history }) => {
               ref={register({ required: true })}
             />
           </div>
-          <Button_dog></Button_dog>
+          <Button_dog register={register}></Button_dog>
           {/* <div>
             <label>dogName</label>
             <InputBox

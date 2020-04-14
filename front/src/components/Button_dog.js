@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { FormContext, useForm } from "react-hook-form";
 import { InputBox } from "../components/Input";
 
-export const Button_dog = () => {
+export const Button_dog = (props) => {
   const [showButton, setShowButton] = useState(false);
   const [dogName, setDogName] = useState("");
   const [hasDog, setHasDog] = useState("");
@@ -54,9 +54,11 @@ export const Button_dog = () => {
             <input
               className="input"
               type="text"
-              placeholder="Food name"
-              value={dogName}
-              onChange={(e) => setDogName(e.target.value)}
+              name="dogName"
+              placeholder="dogName"
+              // value={dogName}
+              ref={props.register()}
+              // onChange={(e) => setDogName(e.target.value)}
             />
           </div>
         </div>
