@@ -4,6 +4,11 @@ import { withRouter } from "react-router-dom";
 import { doLogin } from "../../lib/auth.api";
 import { InputBox } from "../components/Input";
 import { ApiContext } from "../../context/ApiContext";
+import {
+  Formulario,
+  Titulo,
+  ButtonForm,
+} from "../components/Formularios/Formulario";
 
 export const LoginPage = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
@@ -34,25 +39,28 @@ export const LoginPage = withRouter(({ history }) => {
   return (
     <FormContext {...methods}>
       <>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Formulario onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>Username</label>
+            <Titulo>Iniciar Sesión</Titulo>
+            {/* <label>Username</label> */}
             <InputBox
               // className={hasError(errors, "username")}
               name="username"
+              defaultValues="Username"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Password</label>
+            {/* <label>Password</label> */}
             <InputBox
               // className={hasError(errors, "password")}
               name="password"
+              placeholder="Password"
               ref={register({ required: true })}
             />
           </div>
-          <button type="submit">Login</button>
-        </form>
+          <ButtonForm type="submit">Login</ButtonForm>
+        </Formulario>
       </>
     </FormContext>
   );
