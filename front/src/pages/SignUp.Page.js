@@ -5,6 +5,11 @@ import { InputBox } from "../components/Input";
 import { doSignup } from "../../lib/auth.api";
 import { ApiContext } from "../../context/ApiContext";
 import { Button_dog } from "../components/Button_dog";
+import {
+  Formulario,
+  Titulo,
+  ButtonForm,
+} from "../components/Formularios/Formulario";
 
 export const SignUpPage = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
@@ -46,9 +51,10 @@ export const SignUpPage = withRouter(({ history }) => {
   return (
     <FormContext {...methods}>
       <>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Formulario onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>Username</label>
+            <Titulo>Registrate</Titulo>
+            {/* <label>Username</label> */}
             <InputBox
               // className={hasError(errors, "username")}
               name="username"
@@ -81,8 +87,8 @@ export const SignUpPage = withRouter(({ history }) => {
             />
           </div> */}
           {/* <Button_dog /> */}
-          <button type="submit">Login</button>
-        </form>
+          <ButtonForm type="submit">Sign Up</ButtonForm>
+        </Formulario>
       </>
     </FormContext>
   );

@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-export const ButtonForm = styled.button`box-sizing: border-box;
+export const ButtonCancel = styled.button`box-sizing: border-box;
 appearance: none;
 background-color: transparent;
 border: 2px solid #db4437;
@@ -33,5 +32,4 @@ transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 &:hover {
   box-shadow: 0 0 40px 40px $red inset;
 }
-
 `;

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
-import { FormContext, useForm } from "react-hook-form";
-import { InputBox } from "../components/Input";
+import { ButtonForm } from "./Formularios/Formulario";
+import { InputBox } from "./Input";
+import { ButtonAddDog } from "./Formularios/ButtonAddDog";
+import { ButtonCancel } from "./Formularios/ButtonCancel";
 
 export const Button_dog = (props) => {
   const [showButton, setShowButton] = useState(false);
@@ -32,9 +34,9 @@ export const Button_dog = (props) => {
     return (
       <div className="field">
         <div className="control">
-          <button className="button is-link" onClick={() => showForm()}>
-            Add Dog
-          </button>
+          <ButtonAddDog className="button is-link" onClick={() => showForm()}>
+            Añade a tu perro
+          </ButtonAddDog>
         </div>
       </div>
     );
@@ -43,15 +45,18 @@ export const Button_dog = (props) => {
       <>
         <div className="field">
           <div className="control">
-            <button className="button is-danger" onClick={() => showForm()}>
-              Cancel
-            </button>
+            <ButtonCancel
+              className="button is-danger"
+              onClick={() => showForm()}
+            >
+              Cancelar
+            </ButtonCancel>
           </div>
         </div>
         <div className="field">
-          <label className="label">dogName</label>
+          {/* <label className="label">dogName</label> */}
           <div className="control">
-            <input
+            <InputBox
               className="input"
               type="text"
               name="dogName"
