@@ -21,7 +21,7 @@ const api = axios.create({
 
 export const getDogs = async () => {
   const res = await api.get("/");
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 };
 

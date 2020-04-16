@@ -7,6 +7,9 @@ import { InputMeetings } from "../components/Formularios/InputMeetings";
 import { Formulario, Titulo } from "../components/Formularios/Formulario";
 import { ButtonCreatedMeetings } from "../components/Formularios/ButtonCreatedMetting";
 
+const cloudinary = require("cloudinary-core");
+const cl = cloudinary.Cloudinary.new({ cloud_name: "meeting" });
+
 export const MeetingsCreate = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
 
@@ -84,6 +87,8 @@ export const MeetingsCreate = withRouter(({ history }) => {
               ref={register({ required: true })}
             />
           </div>
+          <input name="image" type="file" ref={register()} />
+
           <ButtonCreatedMeetings type="submit">
             Crear Reunión
           </ButtonCreatedMeetings>

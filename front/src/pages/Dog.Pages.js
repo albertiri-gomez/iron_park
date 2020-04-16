@@ -27,12 +27,12 @@ export const DogPages = (props) => {
         {dogs?.map((dog) => {
           return (
             <>
-              {/* <Card.Img variant="top" src={dogs.image} /> */}
               <Card.Body>
+                <Card.Img variant="top" src={dog.image} />
                 <Card.Title>{dog.dogName}</Card.Title>
                 <Card.Text>{dog.description}</Card.Text>
                 <Card.Text>{dog.race}</Card.Text>
-                {/* <Button variant="primary">Go somewhere</Button> */}
+                <Button variant="primary">Go somewhere</Button>
               </Card.Body>
             </>
           );

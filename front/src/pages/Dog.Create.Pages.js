@@ -30,16 +30,16 @@ export const DogsCreate = withRouter(({ history }) => {
 
   const onCreateDogs = async (data) => {
     console.log(data);
-    const myDog = data.image[0];
-    changeAvatar(myDog)
-      .then((res) => {
-        console.log("Changed File");
-        setUser(res.data.user);
-      })
-      .catch((e) => {
-        console.log("Error uploading file");
-        console.log(e);
-      });
+    // const myDog = data.image[0];
+    // changeAvatar(myDog)
+    //   .then((res) => {
+    //     console.log("Changed File");
+    //     setUser(res.data.user);
+    //   })
+    //   .catch((e) => {
+    //     console.log("Error uploading file");
+    //     console.log(e);
+    //   });
     console.log("data", data);
     await createDogs(data);
     setUser(data);
