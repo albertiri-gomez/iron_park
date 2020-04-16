@@ -49,3 +49,9 @@ export const whoUser = async () => {
   console.log("whami", res.data);
   return res.data;
 };
+
+export const changeAvatar = async (avatarFile) => {
+  const data = new FormData();
+  data.append("avatar", avatarFile);
+  return api.post("/", data);
+};

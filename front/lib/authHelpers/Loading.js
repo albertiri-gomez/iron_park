@@ -17,6 +17,6 @@ const LoadingWrapper = styled.div`
 
 export const Loading = () => (
   <LoadingWrapper>
-    <img src="https://i.pinimg.com/originals/2b/7c/f2/2b7cf21b42bccf075a5dbe1b9586d477.gif" />
+    <img src="https://media1.tenor.com/images/85d269dc9595a7bcf87fd0fa4039dd9f/tenor.gif?itemid=8647480" />
   </LoadingWrapper>
 );

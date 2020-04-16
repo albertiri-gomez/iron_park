@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn } = require("../lib/isLoggedMiddleware");
 const Dog = require("../models/Dog");
 const mongoose = require("mongoose");
+const uploadCloudinaryAvatar = require("../middleware/uploader");
 
 // router.get("/", isLoggedIn, async (req, res, next) => {
 //   await Dog.find().populate("user");
@@ -20,22 +21,41 @@ router.get("/", isLoggedIn(), (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 });
 
+// router.post("/profilepic", async (req, res) => {
+//   console.log(req.file);
+//   const user = req.user;
+
+//   // if there was previous profile pic, delete it
+
+//   // Set the new profile pic
+//   user.profilePic = req.file;
+//   const updatedUser = await user.save();
+
+//   return res.json({ status: "Uploaded completed", user: updatedUser });
+// });
+
 //create dog
-router.post("/", async (req, res, next) => {
-  try {
-    const { description, image, dogName, race } = req.body;
-    const newDog = await Dog.create({
-      user: mongoose.Types.ObjectId(req.user.id),
-      dogName,
-      race,
-      description,
-      image,
-    });
-    return res.json(newDog);
-  } catch (error) {
-    console.log(error);
+router.post(
+  "/",
+  uploadCloudinaryAvatar.single("image"),
+  async (req, res, next) => {
+    console.log(req.body);
+    console.log(req.file);
+    try {
+      const { description, dogName, race } = req.body;
+      const newDog = await Dog.create({
+        user: req.user._id,
+        dogName,
+        race,
+        description,
+        image: req.file,
+      });
+      return res.json(newDog);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 /* EDIT */
 router.put("/:id", isLoggedIn(), async (req, res, next) => {

@@ -3,7 +3,9 @@ import { withRouter } from "react-router-dom";
 import { createMeeting } from "../../lib/meeting.api";
 import { useForm, FormContext } from "react-hook-form";
 import { ApiContext } from "../../context/ApiContext";
-import { InputBox } from "../components/Input";
+import { InputMeetings } from "../components/Formularios/InputMeetings";
+import { Formulario, Titulo } from "../components/Formularios/Formulario";
+import { ButtonCreatedMeetings } from "../components/Formularios/ButtonCreatedMetting";
 
 export const MeetingsCreate = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
@@ -32,57 +34,60 @@ export const MeetingsCreate = withRouter(({ history }) => {
   return (
     <FormContext {...methods}>
       <>
-        <form onSubmit={handleSubmit(onCreateMeetings)}>
+        <Formulario onSubmit={handleSubmit(onCreateMeetings)}>
           <div>
-            <label>Usuario</label>
-            <InputBox
+            <Titulo>Crear Reunión</Titulo>
+            {/* <label>Usuario</label> */}
+            <InputMeetings
               // className={hasError(errors, "username")}
               name="username"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Nombre de la reunión</label>
-            <InputBox
+            {/* <label>Nombre de la reunión</label> */}
+            <InputMeetings
               // className={hasError(errors, "password")}
               name="nameMeeting"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Participantes</label>
-            <InputBox
+            {/* <label>Participantes</label> */}
+            <InputMeetings
               // className={hasError(errors, "course")}
               name="participants"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Descripción</label>
-            <InputBox
+            {/* <label>Descripción</label> */}
+            <InputMeetings
               // className={hasError(errors, "course")}
               name="description"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Fecha de la reunión</label>
-            <InputBox
+            {/* <label>Fecha de la reunión</label> */}
+            <InputMeetings
               // className={hasError(errors, "course")}
               name="date"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Hora de la reunión</label>
-            <InputBox
+            {/* <label>Hora de la reunión</label> */}
+            <InputMeetings
               // className={hasError(errors, "course")}
               name="time"
               ref={register({ required: true })}
             />
           </div>
-          <button type="submit">Crear Reunión</button>
-        </form>
+          <ButtonCreatedMeetings type="submit">
+            Crear Reunión
+          </ButtonCreatedMeetings>
+        </Formulario>
       </>
     </FormContext>
   );
