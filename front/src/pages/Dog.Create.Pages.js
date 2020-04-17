@@ -6,7 +6,7 @@ import { InputDogs } from "../components/Formularios/InputDogs";
 import { createDogs } from "../../lib/dog.api";
 import { Formulario, Titulo } from "../components/Formularios/Formulario";
 import { ButtonCreatedDogs } from "../components/Formularios/ButtonCreatedDogs";
-import { changeAvatar } from "../../lib/image.api";
+import { imageDog } from "../../lib/dog.api";
 
 const cloudinary = require("cloudinary-core");
 const cl = cloudinary.Cloudinary.new({ cloud_name: "dogs" });
@@ -28,39 +28,36 @@ export const DogsCreate = withRouter(({ history }) => {
   console.log(user);
   const { register, handleSubmit, errors } = methods;
 
+  // const onCreateDogs = (data) => {
+  //   console.log(data);
+  //   const myDog = data.image[0];
+  //   data.image = myDog;
+  //   console.log("this is data");
+  //   console.log(data);
+  //   imageDog(data).then((data) => {
+  //     setUser([...user, data.user]);
+  //     history.push("/dog");
+  //   });
+  // };
+
   const onCreateDogs = async (data) => {
     console.log(data);
-    // const myDog = data.image[0];
-    // changeAvatar(myDog)
-    //   .then((res) => {
-    //     console.log("Changed File");
-    //     setUser(res.data.user);
-    //   })
-    //   .catch((e) => {
-    //     console.log("Error uploading file");
-    //     console.log(e);
-    //   });
+    const myDog = data.image[0];
+    data.image = myDog;
+    imageDog(myDog)
+      .then((res) => {
+        console.log("Changed File");
+        setUser(res.data.user);
+      })
+      .catch((e) => {
+        console.log("Error uploading file");
+        console.log(e);
+      });
     console.log("data", data);
-    await createDogs(data);
+    await imageDog(data);
     setUser(data);
     history.push("/dog");
   };
-
-  // let imgPath;
-  // if (user.profilePic) {
-  //   // LOCAL FILE
-  //   const localPath = _.get(user, "profilePic.path");
-  //   if (localPath) {
-  //     imgPath = `http://localhost:3000/${localPath}`;
-  //   } else {
-  //     // CLOUDINARY FILE
-  //     //imgPath = _.get(user, "profilePic.url");
-  //     const imgID = _.get(user, "profilePic.public_id");
-  //     console.log("Generate image", imgID);
-  //     imgPath = cl.url(imgID, { width: 200, crop: "fit" });
-  //     console.log(imgPath);
-  //   }
-  // }
 
   return (
     <FormContext {...methods}>

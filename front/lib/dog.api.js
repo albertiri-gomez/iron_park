@@ -50,8 +50,16 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const changeAvatar = async (avatarFile) => {
+export const imageDog = async (dogFile) => {
+  console.log("this is Datafile");
+  console.log(dogFile);
   const data = new FormData();
-  data.append("avatar", avatarFile);
-  return api.post("/", data);
+  data.append("image", dogFile.image);
+  data.append("dogName", dogFile.dogname);
+  data.append("race", dogFile.race);
+  data.append("description", dogFile.description);
+  console.log("todos los campos con append");
+  console.log(data);
+  const response = await api.post("/", data);
+  return response.data;
 };

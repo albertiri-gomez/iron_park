@@ -28,7 +28,7 @@ export const DogPages = (props) => {
           return (
             <>
               <Card.Body>
-                <Card.Img variant="top" src={dog.image} />
+                <Card.Img variant="top" src={dog.image?.url} />
                 <Card.Title>{dog.dogName}</Card.Title>
                 <Card.Text>{dog.description}</Card.Text>
                 <Card.Text>{dog.race}</Card.Text>

@@ -14,6 +14,7 @@ import { MeetingsPages } from "./pages/Meetings.Pages";
 import { MeetingsCreate } from "./pages/Meetings.Create.Pages";
 import { withAuthentication } from "../lib/withAuthentication";
 import { ParkDetail } from "./pages/ParkDetail.pages";
+import { MapPages } from "./Pages/Map.pages";
 
 export const App = withAuthentication(() => (
   <Router>
@@ -29,6 +30,7 @@ export const App = withAuthentication(() => (
             component={(props) => <ParkDetail idPark={props.match.params.id} />}
           />{" "}
           <Route path="/park" component={ParkPages} />
+          <Route path="/map" exact component={MapPages} />
           <Route path="/dog" component={DogPages} />
           <Route path="/create_dog" component={DogsCreate} />
           <Route path="/edit_dog" component={DogsEdit} />
