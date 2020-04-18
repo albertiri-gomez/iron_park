@@ -5,31 +5,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// export const getMeeting = async ({
-//   user,
-//   park,
-//   nameMeeting,
-//   participants,
-//   description,
-//   time,
-//   date,
-//   image,
-// }) => {
-//   const res = await api.get("/", {
-//     user,
-//     park,
-//     nameMeeting,
-//     participants,
-//     description,
-//     time,
-//     date,
-//     image,
-//   });
-//   console.log("Respuesta del server", res.data);
-//   console.log("reuniones Mostradas");
-//   return res.data;
-// };
-
 export const getMeeting = async () => {
   const res = await api.get("/");
   console.log(res.data);
@@ -107,4 +82,20 @@ export const whoUser = async () => {
   const res = await api.post("/whoami");
   console.log("whami", res.data);
   return res.data;
+};
+
+export const createMeetingsImage = async (meetingFile) => {
+  console.log("this is Datafile");
+  console.log(meetingFile);
+  const data = new FormData();
+  data.append("image", meetingFile.image);
+  data.append("nameMeeting", meetingFile.nameMeeting);
+  data.append("participants", meetingFile.participants);
+  data.append("description", meetingFile.description);
+  data.append("time", meetingFile.time);
+  data.append("date", meetingFile.date);
+  console.log("todos los campos con append");
+  console.log(data);
+  const response = await api.post("/", data);
+  return response.data;
 };

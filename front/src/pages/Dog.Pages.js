@@ -12,14 +12,6 @@ export const DogPages = (props) => {
   useEffect(() => {
     getDogs().then((dog) => setDogs(dog));
   }, []);
-  // const { user, setUser } = useContext(ApiContext);
-
-  // const onClick = async (e) => {
-  //   e.preventDefault();
-  //   await getDogs();
-  //   setUser(null);
-  //   history.push("/");
-  // };
 
   return (
     <>
@@ -48,5 +40,3 @@ export const DogPages = (props) => {
     </>
   );
 };
-
-// dogName, race, description, image

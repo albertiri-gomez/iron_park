@@ -86,14 +86,4 @@ router.post("/whoami", (req, res, next) => {
   else return res.status(401).json({ status: "No user session present" });
 });
 
-// // Upload file
-// router.post("/dog/upload", async (req, res, next) => {
-//   try {
-//     const { file } = req.body;
-//     res.json(`User updated ${file}`);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
 module.exports = router;

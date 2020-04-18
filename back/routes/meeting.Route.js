@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn } = require("../lib/isLoggedMiddleware");
 const Meeting = require("../models/Meeting");
-const mongoose = require("mongoose");
 const uploadCloudinaryAvatar = require("../middleware/uploader");
 
 //get
@@ -23,14 +22,7 @@ router.post(
   uploadCloudinaryAvatar.single("image"),
   async (req, res, next) => {
     try {
-      const {
-        nameMeeting,
-        participants,
-        time,
-        date,
-        description,
-        image,
-      } = req.body;
+      const { nameMeeting, participants, time, date, description } = req.body;
       console.log(req.body);
       const newMeeting = await Meeting.create({
         user: req.user.id,
@@ -40,7 +32,7 @@ router.post(
         time,
         date,
         description,
-        image,
+        image: req.file,
       });
       return res.json(newMeeting);
     } catch (error) {
