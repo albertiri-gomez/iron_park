@@ -5,26 +5,34 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const getMeeting = async ({
-  user,
-  park,
-  nameMeeting,
-  participants,
-  description,
-  time,
-  date,
-}) => {
-  const res = await api.get("/", {
-    user,
-    park,
-    nameMeeting,
-    participants,
-    description,
-    time,
-    date,
-  });
-  console.log("Respuesta del server", res.data);
-  console.log("reuniones Mostradas");
+// export const getMeeting = async ({
+//   user,
+//   park,
+//   nameMeeting,
+//   participants,
+//   description,
+//   time,
+//   date,
+//   image,
+// }) => {
+//   const res = await api.get("/", {
+//     user,
+//     park,
+//     nameMeeting,
+//     participants,
+//     description,
+//     time,
+//     date,
+//     image,
+//   });
+//   console.log("Respuesta del server", res.data);
+//   console.log("reuniones Mostradas");
+//   return res.data;
+// };
+
+export const getMeeting = async () => {
+  const res = await api.get("/");
+  console.log(res.data);
   return res.data;
 };
 

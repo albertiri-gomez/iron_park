@@ -6,22 +6,25 @@ const mettingSchema = new mongoose.Schema(
     park: { type: mongoose.Types.ObjectId, ref: "Park" },
     nameMeeting: {
       type: String,
-      require: true
+      require: true,
     },
     participants: {
       type: Number,
-      default: 0
+      default: 0,
     },
     description: {
-      type: String
+      type: String,
     },
     time: {
-      type: String
+      type: String,
     },
     date: {
       type: Date,
-      default: Date.now
-    }
+      default: Date.now,
+    },
+    image: {
+      type: Object,
+    },
   },
   {
     timestamps: true,
@@ -30,8 +33,8 @@ const mettingSchema = new mongoose.Schema(
         ret.id = ret._id;
         delete ret.__v;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 

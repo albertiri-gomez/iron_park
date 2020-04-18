@@ -17,9 +17,7 @@ const dogSchema = new Schema(
     description: {
       type: String,
     },
-    image: {
-      type: String,
-    },
+    image: Object,
   },
   {
     timestamps: true,

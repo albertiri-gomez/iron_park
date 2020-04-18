@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { createMeeting } from "../../lib/meeting.api";
 import { useForm, FormContext } from "react-hook-form";
 import { ApiContext } from "../../context/ApiContext";
-import { InputBox } from "../components/Input";
+import { InputDogs } from "../components/Formularios/InputDogs";
 import { createDogs } from "../../lib/dog.api";
+import { Formulario, Titulo } from "../components/Formularios/Formulario";
+import { ButtonCreatedDogs } from "../components/Formularios/ButtonCreatedDogs";
+import { imageDog } from "../../lib/dog.api";
+
+const cloudinary = require("cloudinary-core");
+const cl = cloudinary.Cloudinary.new({ cloud_name: "dogs" });
 
 export const DogsCreate = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
@@ -23,28 +28,52 @@ export const DogsCreate = withRouter(({ history }) => {
   console.log(user);
   const { register, handleSubmit, errors } = methods;
 
+  // const onCreateDogs = (data) => {
+  //   console.log(data);
+  //   const myDog = data.image[0];
+  //   data.image = myDog;
+  //   console.log("this is data");
+  //   console.log(data);
+  //   imageDog(data).then((data) => {
+  //     setUser([...user, data.user]);
+  //     history.push("/dog");
+  //   });
+  // };
+
   const onCreateDogs = async (data) => {
+    console.log(data);
+    const myDog = data.image[0];
+    data.image = myDog;
+    imageDog(myDog)
+      .then((res) => {
+        console.log("Changed File");
+        setUser(res.data.user);
+      })
+      .catch((e) => {
+        console.log("Error uploading file");
+        console.log(e);
+      });
     console.log("data", data);
-    await createDogs(data);
+    await imageDog(data);
     setUser(data);
-    history.push("/dogs");
+    history.push("/dog");
   };
 
   return (
     <FormContext {...methods}>
       <>
-        <form onSubmit={handleSubmit(onCreateDogs)}>
-          <div>
+        <Formulario onSubmit={handleSubmit(onCreateDogs)}>
+          {/* <div>
             <label>Usuario</label>
-            <InputBox
+            <InputDogs
               // className={hasError(errors, "username")}
               name="username"
               ref={register({ required: true })}
             />
-          </div>
+          </div> */}
           <div>
             <label>Nombre del perro</label>
-            <InputBox
+            <InputDogs
               // className={hasError(errors, "password")}
               name="dogName"
               ref={register({ required: true })}
@@ -52,7 +81,7 @@ export const DogsCreate = withRouter(({ history }) => {
           </div>
           <div>
             <label>Raza</label>
-            <InputBox
+            <InputDogs
               // className={hasError(errors, "course")}
               name="race"
               ref={register({ required: true })}
@@ -60,22 +89,33 @@ export const DogsCreate = withRouter(({ history }) => {
           </div>
           <div>
             <label>Descripción</label>
-            <InputBox
+            <InputDogs
               // className={hasError(errors, "course")}
               name="description"
               ref={register({ required: true })}
             />
           </div>
-          <div>
+          {/* {imgPath && (
+            <div>
+              <img
+                src={imgPath}
+                width="200"
+                style={{ border: "1px solid red" }}
+              />
+            </div>
+          )} */}
+          <input name="image" type="file" ref={register()} />
+
+          {/* <div>
             <label>Imagen</label>
-            <InputBox
+            <InputDogs
               // className={hasError(errors, "course")}
               name="image"
               ref={register({ required: true })}
             />
-          </div>
-          <button type="submit">Editar Perro</button>
-        </form>
+          </div> */}
+          <ButtonCreatedDogs type="submit">Crear Perro</ButtonCreatedDogs>
+        </Formulario>
       </>
     </FormContext>
   );

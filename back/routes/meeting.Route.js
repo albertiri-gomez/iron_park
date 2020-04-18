@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn } = require("../lib/isLoggedMiddleware");
 const Meeting = require("../models/Meeting");
 const mongoose = require("mongoose");
+const uploadCloudinaryAvatar = require("../middleware/uploader");
 
 //get
 router.get("/", isLoggedIn(), (req, res, next) => {
@@ -17,24 +18,36 @@ router.get("/", isLoggedIn(), (req, res, next) => {
 });
 
 /*CREATE*/
-router.post("/", isLoggedIn(), async (req, res, next) => {
-  try {
-    const { nameMeeting, participants, time, date, description } = req.body;
-    console.log(req.body);
-    const newMeeting = await Meeting.create({
-      user: req.user.id,
-      park: req.body.park,
-      nameMeeting,
-      participants,
-      time,
-      date,
-      description,
-    });
-    return res.json(newMeeting);
-  } catch (error) {
-    console.log(error);
+router.post(
+  "/",
+  uploadCloudinaryAvatar.single("image"),
+  async (req, res, next) => {
+    try {
+      const {
+        nameMeeting,
+        participants,
+        time,
+        date,
+        description,
+        image,
+      } = req.body;
+      console.log(req.body);
+      const newMeeting = await Meeting.create({
+        user: req.user.id,
+        park: req.body.park,
+        nameMeeting,
+        participants,
+        time,
+        date,
+        description,
+        image,
+      });
+      return res.json(newMeeting);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 /* EDIT */
 router.put("/:id", isLoggedIn(), async (req, res, next) => {

@@ -21,7 +21,7 @@ const api = axios.create({
 
 export const getDogs = async () => {
   const res = await api.get("/");
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 };
 
@@ -48,4 +48,18 @@ export const whoUser = async () => {
   const res = await api.post("/whoami");
   console.log("whami", res.data);
   return res.data;
+};
+
+export const imageDog = async (dogFile) => {
+  console.log("this is Datafile");
+  console.log(dogFile);
+  const data = new FormData();
+  data.append("image", dogFile.image);
+  data.append("dogName", dogFile.dogname);
+  data.append("race", dogFile.race);
+  data.append("description", dogFile.description);
+  console.log("todos los campos con append");
+  console.log(data);
+  const response = await api.post("/", data);
+  return response.data;
 };

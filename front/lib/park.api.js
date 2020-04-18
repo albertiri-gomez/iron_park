@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/parks",
@@ -83,4 +84,15 @@ export const whoUser = async () => {
   const res = await api.post("/whoami");
   console.log("whami", res.data);
   return res.data;
+};
+
+export const getParkID = async (idPark) => {
+  const res = await api.get("/");
+
+  // Filter for specific park
+  const all = _.filter(res.data, { _id: idPark });
+  console.log("llama al back", idPark);
+  console.log("llama al res", res);
+  console.log("llama al all", all);
+  return all;
 };
