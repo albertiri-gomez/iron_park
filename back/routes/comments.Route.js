@@ -2,11 +2,13 @@ const express = require("express");
 const Comment = require("../models/Comment");
 const Dog = require("../models/Dog");
 const Park = require("../models/Park");
+const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 const router = express.Router();
 
 router.post("/:parkId", (req, res, next) => {
   const newComment = new Comment(req.body);
+  console.log("esto es find", req.params.parkId);
   newComment
     .save()
     .then((comment) => {
@@ -14,8 +16,8 @@ router.post("/:parkId", (req, res, next) => {
         { _id: req.params.parkId },
         { $push: { comments: comment._id } },
         { new: true }
-      ).then((movie) => {
-        res.json(movie);
+      ).then((park) => {
+        res.json(park);
       });
     })
     .catch((err) => res.status(500).json(err));
