@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { createMeeting } from "../../lib/meeting.api";
+import { createMeetingsImage } from "../../lib/meeting.api";
 import { useForm, FormContext } from "react-hook-form";
 import { ApiContext } from "../../context/ApiContext";
 import { InputMeetings } from "../components/Formularios/InputMeetings";
@@ -28,8 +28,20 @@ export const MeetingsCreate = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const onCreateMeetings = async (data) => {
+    console.log(data);
+    const myMeeting = data.image[0];
+    data.image = myMeeting;
+    createMeetingsImage(myMeeting)
+      .then((res) => {
+        console.log("Changed File");
+        setUser(res.data.user);
+      })
+      .catch((e) => {
+        console.log("Error uploading file");
+        console.log(e);
+      });
     console.log("data", data);
-    await createMeeting(data);
+    await createMeetingsImage(data);
     setUser(data);
     history.push("/meeting");
   };
@@ -38,15 +50,15 @@ export const MeetingsCreate = withRouter(({ history }) => {
     <FormContext {...methods}>
       <>
         <Formulario onSubmit={handleSubmit(onCreateMeetings)}>
-          <div>
-            <Titulo>Crear Reunión</Titulo>
-            {/* <label>Usuario</label> */}
-            <InputMeetings
+          {/* <div> */}
+          <Titulo>Crear Reunión</Titulo>
+          {/* <label>Usuario</label> */}
+          {/* <InputMeetings
               // className={hasError(errors, "username")}
               name="username"
               ref={register({ required: true })}
             />
-          </div>
+          </div> */}
           <div>
             {/* <label>Nombre de la reunión</label> */}
             <InputMeetings

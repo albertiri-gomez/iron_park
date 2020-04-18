@@ -1,5 +1,4 @@
 import axios from "axios";
-import mongoose from "mongoose";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/dogs",
@@ -25,12 +24,12 @@ export const getDogs = async () => {
   return res.data;
 };
 
-export const createDogs = async ({ dogName, race, description, image }) => {
-  const res = await api.post("/", { dogName, race, description, image });
-  console.log("Respuesta del server", res.data);
-  console.log("perros Creado");
-  return res.data;
-};
+// export const createDogs = async ({ dogName, race, description, image }) => {
+//   const res = await api.post("/", { dogName, race, description, image });
+//   console.log("Respuesta del server", res.data);
+//   console.log("perros Creado");
+//   return res.data;
+// };
 
 export const dogEdit = async ({ dogName, race, description, image }) => {
   console.log("edit!");
@@ -50,7 +49,7 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const imageDog = async (dogFile) => {
+export const createDogsImage = async (dogFile) => {
   console.log("this is Datafile");
   console.log(dogFile);
   const data = new FormData();

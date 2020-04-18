@@ -22,9 +22,7 @@ const mettingSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    image: {
-      type: Object,
-    },
+    image: Object,
   },
   {
     timestamps: true,

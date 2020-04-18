@@ -3,10 +3,9 @@ import { withRouter } from "react-router-dom";
 import { useForm, FormContext } from "react-hook-form";
 import { ApiContext } from "../../context/ApiContext";
 import { InputDogs } from "../components/Formularios/InputDogs";
-import { createDogs } from "../../lib/dog.api";
 import { Formulario, Titulo } from "../components/Formularios/Formulario";
 import { ButtonCreatedDogs } from "../components/Formularios/ButtonCreatedDogs";
-import { imageDog } from "../../lib/dog.api";
+import { createDogsImage } from "../../lib/dog.api";
 
 const cloudinary = require("cloudinary-core");
 const cl = cloudinary.Cloudinary.new({ cloud_name: "dogs" });
@@ -44,7 +43,7 @@ export const DogsCreate = withRouter(({ history }) => {
     console.log(data);
     const myDog = data.image[0];
     data.image = myDog;
-    imageDog(myDog)
+    createDogsImage(myDog)
       .then((res) => {
         console.log("Changed File");
         setUser(res.data.user);
@@ -54,7 +53,7 @@ export const DogsCreate = withRouter(({ history }) => {
         console.log(e);
       });
     console.log("data", data);
-    await imageDog(data);
+    await createDogsImage(data);
     setUser(data);
     history.push("/dog");
   };

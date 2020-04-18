@@ -39,7 +39,7 @@ export const MeetingsPages = (props) => {
                         </a>
                       </li>
                     </ul> */}
-              <Card.Img variant="top" src={meeting.image} />
+              <Card.Img variant="top" src={meeting.image.url} />
               <Card.Body>
                 <Card.Title>{meeting.nameMeeting}</Card.Title>
                 <Card.Text>{meeting.description}</Card.Text>
