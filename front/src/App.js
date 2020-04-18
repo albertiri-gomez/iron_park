@@ -14,7 +14,7 @@ import { MeetingsPages } from "./pages/Meetings.Pages";
 import { MeetingsCreate } from "./pages/Meetings.Create.Pages";
 import { withAuthentication } from "../lib/withAuthentication";
 import { ParkDetail } from "./pages/ParkDetail.pages";
-import { MapPages } from "./Pages/Map.pages";
+import { MapPages } from "./pages/Map.pages";
 
 export const App = withAuthentication(() => (
   <Router>
