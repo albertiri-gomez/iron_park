@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ParkPages } from "../pages/Park.pages";
 import { getParkID } from "../../lib/park.api";
-import { getParksOne } from "../../lib/park.api";
 import { LoadScript } from "@react-google-maps/api";
 import { MapView } from "../components/Maps";
-import { Token } from "../../token_key";
+import { Token } from "../../token/token_key";
+import { Comments } from "../components/Comments";
 
 export const ParkDetail = (props) => {
   console.log(props);
@@ -33,6 +32,8 @@ export const ParkDetail = (props) => {
           </ul>
         </div>
         <MapView value={park[0]?.location}></MapView>
+
+        <Comments></Comments>
       </LoadScript>
     );
   }
