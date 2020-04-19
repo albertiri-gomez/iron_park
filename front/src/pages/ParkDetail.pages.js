@@ -21,20 +21,26 @@ export const ParkDetail = (props) => {
     return <div>cargando</div>;
   } else {
     return (
-      <LoadScript id="map-google-load" googleMapsApiKey={Token()}>
-        <div>
-          {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
-          <ul>
-            {park?.map((parks) => (
-              <li>{parks.description}</li>
-            ))}
-            {/* <li key={park.name}>{park.description} </li> */}
-          </ul>
-        </div>
-        <MapView value={park[0]?.location}></MapView>
+      <>
+        <LoadScript id="map-google-load" googleMapsApiKey={Token()}>
+          <div>
+            {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
+            <ul>
+              {park?.map((parks) => (
+                <div>
+                  <li>{parks.description}</li>
 
-        <Comments></Comments>
-      </LoadScript>
+                  <li>{parks.Comments}</li>
+                </div>
+              ))}
+              {/* <li key={park.name}>{park.description} </li> */}
+            </ul>
+          </div>
+          <MapView value={park[0]?.location}></MapView>
+
+          <Comments park={park[0]?._id}></Comments>
+        </LoadScript>
+      </>
     );
   }
 };

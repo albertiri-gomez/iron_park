@@ -10,8 +10,9 @@ import {
   ButtonForm,
 } from "../components/Formularios/Formulario";
 
-export const Comments = withRouter(({ history }) => {
+export const Comments = (park) => {
   const { user, setUser } = useContext(ApiContext);
+  console.log("esto es parque", park);
 
   const methods = useForm({
     mode: "onBlur",
@@ -21,19 +22,19 @@ export const Comments = withRouter(({ history }) => {
   });
 
   const { register, handleSubmit, errors } = methods;
-
+  const idPark = park.park;
   const onSubmit = async (data) => {
     console.log("Data is");
     console.log("data", data);
-    const responseServer = await CommentsCreate(data);
+    const responseServer = await CommentsCreate([data, idPark]);
 
-    if (!responseServer.status) {
-      setUser(data);
-      history.push("/ParkDetail/:id");
-    } else {
-      console.log(`fallo ${responseServer.message}`);
-      return history.push("/ParkDetail/:id");
-    }
+    // if (!responseServer.status) {
+    //   setUser(data);
+    //   // history.push("/ParkDetail/:id");
+    // } else {
+    //   console.log(`fallo ${responseServer.message}`);
+    //   // return history.push("/ParkDetail/:id");
+    // }
   };
   return (
     <FormContext {...methods}>
@@ -42,12 +43,12 @@ export const Comments = withRouter(({ history }) => {
           <div>
             <Titulo>añadir comentario</Titulo>
             {/* <label>Username</label> */}
-            {/* <InputBox
+            <InputBox
               // className={hasError(errors, "username")}
               name="username"
               defaultValues="Username"
               ref={register({ required: true })}
-            /> */}
+            />
           </div>
           <div>
             {/* <label>Password</label> */}
@@ -63,4 +64,4 @@ export const Comments = withRouter(({ history }) => {
       </>
     </FormContext>
   );
-});
+};

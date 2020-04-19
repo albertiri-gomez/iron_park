@@ -17,10 +17,7 @@ const InputText = styled.input`
   border-radius: 2px;
   color: #444;
   font-size: 1.1em;
-  ::placeholder {
-    color: blue;
-    font-size: 1.5em;
-  }
+
   :focus {
     outline: none;
     border: none;
@@ -33,7 +30,7 @@ const InputText = styled.input`
 `;
 
 export const InputDogs = React.forwardRef(
-  ({ label, name, type = "text" }, ref) => {
+  ({ label, name, type, placeholder = "text" }, ref) => {
     const { errors } = useFormContext();
     return (
       <div>
@@ -41,6 +38,7 @@ export const InputDogs = React.forwardRef(
         <InputText
           type={type}
           className={hasError(errors, name)}
+          placeholder={placeholder}
           name={name}
           ref={ref}
         />

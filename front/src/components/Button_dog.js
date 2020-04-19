@@ -60,7 +60,33 @@ export const Button_dog = (props) => {
               className="input"
               type="text"
               name="dogName"
-              placeholder="dogName"
+              placeholder="Nombre del perro"
+              // value={dogName}
+              ref={props.register()}
+              // onChange={(e) => setDogName(e.target.value)}
+            />
+            <InputBox
+              className="input"
+              type="text"
+              name="race"
+              placeholder="Raza"
+              // value={dogName}
+              ref={props.register()}
+              // onChange={(e) => setDogName(e.target.value)}
+            />
+            <InputBox
+              className="input"
+              type="text"
+              name="description"
+              placeholder="Descripción"
+              // value={dogName}
+              ref={props.register()}
+              // onChange={(e) => setDogName(e.target.value)}
+            />
+            <input
+              className="input"
+              type="file"
+              name="image"
               // value={dogName}
               ref={props.register()}
               // onChange={(e) => setDogName(e.target.value)}

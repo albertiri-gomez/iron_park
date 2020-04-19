@@ -43,15 +43,15 @@ export const DogsCreate = withRouter(({ history }) => {
     console.log(data);
     const myDog = data.image[0];
     data.image = myDog;
-    createDogsImage(myDog)
-      .then((res) => {
-        console.log("Changed File");
-        setUser(res.data.user);
-      })
-      .catch((e) => {
-        console.log("Error uploading file");
-        console.log(e);
-      });
+    // createDogsImage(myDog)
+    //   .then((res) => {
+    //     console.log("Changed File");
+    //     setUser(res.data.user);
+    //   })
+    //   .catch((e) => {
+    //     console.log("Error uploading file");
+    //     console.log(e);
+    //   });
     console.log("data", data);
     await createDogsImage(data);
     setUser(data);
@@ -71,26 +71,26 @@ export const DogsCreate = withRouter(({ history }) => {
             />
           </div> */}
           <div>
-            <label>Nombre del perro</label>
             <InputDogs
               // className={hasError(errors, "password")}
               name="dogName"
+              placeholder="Nombre del perro"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Raza</label>
             <InputDogs
               // className={hasError(errors, "course")}
               name="race"
+              placeholder="Raza"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            <label>Descripción</label>
             <InputDogs
               // className={hasError(errors, "course")}
               name="description"
+              placeholder="Descripción"
               ref={register({ required: true })}
             />
           </div>
@@ -103,7 +103,9 @@ export const DogsCreate = withRouter(({ history }) => {
               />
             </div>
           )} */}
-          <input name="image" type="file" ref={register()} />
+          <div className="padding-image">
+            <input name="image" type="file" ref={register()} />
+          </div>
 
           {/* <div>
             <label>Imagen</label>
