@@ -6,14 +6,21 @@ const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 const router = express.Router();
 
-router.post("/:parkId", (req, res, next) => {
-  const newComment = new Comment(req.body);
+router.post("/addCommentPark", (req, res, next) => {
+  console.log("bodyyyyyyyyyyy", req.body.data[1]);
+  const content = req.body[0];
+  const newComment = new Comment(content);
+  // const newComment = new Comment(req.body[0].content);
+
+  const id = req.body.data[1];
   console.log("esto es find", req.params.parkId);
   newComment
     .save()
     .then((comment) => {
+      console.log("esto es", comment);
+      console.log("estos es", id);
       Park.findOneAndUpdate(
-        { _id: req.params.parkId },
+        { _id: id },
         { $push: { comments: comment._id } },
         { new: true }
       ).then((park) => {
