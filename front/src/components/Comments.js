@@ -24,17 +24,24 @@ export const Comments = (park) => {
   const { register, handleSubmit, errors } = methods;
   const idPark = park.park;
   const onSubmit = async (data) => {
-    console.log("Data is");
-    console.log("data", data);
-    const responseServer = await CommentsCreate([data, idPark]);
+    const commentInfo = {
+      data,
+      user,
+      idPark,
+    };
+    await CommentsCreate(commentInfo);
 
-    // if (!responseServer.status) {
-    //   setUser(data);
-    //   // history.push("/ParkDetail/:id");
-    // } else {
-    //   console.log(`fallo ${responseServer.message}`);
-    //   // return history.push("/ParkDetail/:id");
-    // }
+    // console.log("Data is");
+    // console.log("data", data);
+    // const commentInfo = { data, park };
+    // await CommentsCreate(commentInfo);
+    // // if (!responseServer.status) {
+    // //   setUser(data);
+    // //   // history.push("/ParkDetail/:id");
+    // // } else {
+    // //   console.log(`fallo ${responseServer.message}`);
+    // //   // return history.push("/ParkDetail/:id");
+    // // }
   };
   return (
     <FormContext {...methods}>
@@ -43,19 +50,20 @@ export const Comments = (park) => {
           <div>
             <Titulo>añadir comentario</Titulo>
             {/* <label>Username</label> */}
-            <InputBox
+            {/* <InputBox
               // className={hasError(errors, "username")}
-              name="username"
-              defaultValues="Username"
+              name="author"
+              defaultValues=""
+              placeholder="autor"
               ref={register({ required: true })}
-            />
+            /> */}
           </div>
           <div>
             {/* <label>Password</label> */}
             <InputBox
               // className={hasError(errors, "password")}
               name="content"
-              placeholder="content"
+              placeholder="contenido"
               ref={register({ required: true })}
             />
           </div>

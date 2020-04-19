@@ -6,14 +6,15 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const CommentsCreate = async (data) => {
-  console.log("eeee", data);
-  const res = await api.post("/addCommentPark", {
+export const CommentsCreate = async (commentInfo) => {
+  //   console.log("eeee", commentInfo);
+  const res = await api.post(
+    "/addCommentPark",
+    commentInfo
     // content,
     // author,
     // user: req.user.id,
-    data,
-  });
+  );
   console.log("Respuesta del server", res.data);
   console.log("perros Mostrados");
   return res.data;

@@ -7,20 +7,21 @@ const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const router = express.Router();
 
 router.post("/addCommentPark", (req, res, next) => {
-  console.log("bodyyyyyyyyyyy", req.body.data[1]);
-  const content = req.body[0];
-  const newComment = new Comment(content);
-  // const newComment = new Comment(req.body[0].content);
-
-  const id = req.body.data[1];
-  console.log("esto es find", req.params.parkId);
+  console.log("prueba", req.body);
+  // console.log("bodyyyyyyyyyyy", req.body.data[1]);
+  // const content = req.body[0];
+  const newComment = new Comment({
+    author: req.body.user._id,
+    user: req.body.user.username,
+    content: req.body.data.content,
+  });
   newComment
     .save()
     .then((comment) => {
-      console.log("esto es", comment);
-      console.log("estos es", id);
+      // console.log("esto es", comment);
+      //  console.log("estos es", id);
       Park.findOneAndUpdate(
-        { _id: id },
+        { _id: req.body.idPark },
         { $push: { comments: comment._id } },
         { new: true }
       ).then((park) => {
@@ -28,6 +29,25 @@ router.post("/addCommentPark", (req, res, next) => {
       });
     })
     .catch((err) => res.status(500).json(err));
+
+  //  const newComment = new Comment(req.body[0].content);
+
+  //  const id = req.body.data[1];
+  // console.log("esto es find", req.params.parkId);
+  // newComment
+  //   .save()
+  //   .then((comment) => {
+  //     console.log("esto es", comment);
+  //     console.log("estos es", id);
+  //     Park.findOneAndUpdate(
+  //       { _id: id },
+  //       { $push: { comments: comment._id } },
+  //       { new: true }
+  //     ).then((park) => {
+  //       res.json(park);
+  //     });
+  //   })
+  //   .catch((err) => res.status(500).json(err));
 });
 
 router.post("/:dogId", (req, res, next) => {

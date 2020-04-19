@@ -30,7 +30,9 @@ export const ParkDetail = (props) => {
                 <div>
                   <li>{parks.description}</li>
 
-                  <li>{parks.Comments}</li>
+                  {parks?.comments.map((contentInfo) => (
+                    <li> {contentInfo.content}</li>
+                  ))}
                 </div>
               ))}
               {/* <li key={park.name}>{park.description} </li> */}
