@@ -32,7 +32,11 @@ const debug = require("debug")(
 const app = express();
 
 // Cross Domain CORS whitlist
-const whitelist = [process.env.DBURLHEROKU, process.env.DBAPI];
+const whitelist = [
+  process.env.DBURLHEROKU,
+  process.env.DBAPI,
+  process.env.DBAPIS,
+];
 const corsOptions = {
   origin: function (origin, callback) {
     console.log(`Origin: ${origin}`);
