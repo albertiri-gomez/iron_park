@@ -46,37 +46,28 @@ export const MeetingsPages = (props) => {
                 <Card.Text>{meeting.date}</Card.Text>
                 <Button variant="primary">Go somewhere</Button>
               </Card.Body> */}
-              <div class="row">
-                <div class="example-1 card">
-                  <div class="wrapper">
-                    <div class="date">{meeting.date}</div>
-                    <div class="data">
-                      <div class="content">
-                        <span class="author">{meeting.nameMeeting}</span>
-                        <h1 class="title">
-                          <a href="#">{meeting.participants}</a>
-                        </h1>
-                        <p class="text">{meeting.description}</p>
-                        <label for="show-menu" class="menu-button">
-                          <span></span>
-                        </label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="card card1">
+                      <div class="embed-responsive embed-responsive-4by3">
+                        <img src={meeting.image.url}></img>
+                        <div class="card-socials">
+                          <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                          </a>
+                          <a href="#">
+                            <i class="fab fa-twitter"></i>
+                          </a>
+                          <a href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                          </a>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">{meeting.nameMeeting}</h5>
+                          <p class="card-text">{meeting.description}</p>
+                        </div>
                       </div>
-                      <input type="checkbox" id="show-menu" />
-                      <ul class="menu-content">
-                        <li>
-                          <a href="#" class="fa fa-bookmark-o"></a>
-                        </li>
-                        <li>
-                          <a href="#" class="fa fa-heart-o">
-                            <span>47</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="fa fa-comment-o">
-                            <span>8</span>
-                          </a>
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -124,4 +115,26 @@ export const MeetingsPages = (props) => {
       </div>
     </div>
   </div> */
+}
+
+{
+  /* <div class="container">
+   <div class="row">
+
+      <div class="col-sm-6 col-lg-4">
+         <div class="card card1">
+            <div class="embed-responsive embed-responsive-4by3">
+               <img src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383_960_720.jpg" alt="#" class="card-img embed-responsive-item">
+            </div>
+            <div class="card-socials">
+               <a href="#"><i class="fab fa-facebook-f"></i></a>
+               <a href="#"><i class="fab fa-twitter"></i></a>
+               <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="card-body">
+               <h5 class="card-title">Card1 title</h5>
+               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+         </div>
+      </div> */
 }
