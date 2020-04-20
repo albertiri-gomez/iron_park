@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const { MongoError } = require("mongodb");
 
-const DBURL = process.env.DBURLHEROKUBACK;
+const DBURL = process.env.DBURLHEROKU;
 
 const dropIfExists = async (Model) => {
   try {
