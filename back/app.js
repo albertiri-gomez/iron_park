@@ -11,7 +11,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 mongoose
-  .connect(process.env.DBURL, {
+  .connect(process.env.DBURLHEROKUBACK, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -32,7 +32,7 @@ const debug = require("debug")(
 const app = express();
 
 // Cross Domain CORS whitlist
-const whitelist = [process.env.DBURL, process.env.DBAPI];
+const whitelist = [process.env.DBURLHEROKUBACK, process.env.DBAPI];
 const corsOptions = {
   origin: function (origin, callback) {
     console.log(`Origin: ${origin}`);
