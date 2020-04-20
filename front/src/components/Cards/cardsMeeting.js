@@ -122,3 +122,5 @@ export const cardAuthor = styled.span`
 export const cardTitle = styled.h1`
   margin-top: 10px;
 `;
+
+export const body = styled.div``;

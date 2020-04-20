@@ -1,0 +1,53 @@
+// body {
+//   padding: 100px 0;
+// }
+// .card {
+//   margin-bottom: 30px;
+// }
+// .btn,
+// .btn:focus {
+//   outline: none;
+//   box-shadow: none;
+// }
+
+// $white: #ffffff;
+// $gray: #212121;
+// $primary: #05668d;
+// $secondary: #028090;
+
+// .card1 {
+//   $border-radius: 15px;
+//   $card-social-item-size: 40px;
+//   border: 0;
+//   border-radius: $border-radius 0 $border-radius 0;
+//   box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.75);
+//   .card-img {
+//     border-radius: $border-radius 0 0 0;
+//     object-fit: cover;
+//   }
+//   .card-socials {
+//     display: flex;
+//     flex-wrap: wrap;
+//     margin-top: -($card-social-item-size/2);
+//     padding: 0 20px;
+//     z-index: 1;
+//     a {
+//       display: block;
+//       border-radius: $border-radius 0 $border-radius 0;
+//       width: $card-social-item-size;
+//       height: $card-social-item-size;
+//       background: $primary;
+//       color: $white;
+//       line-height: $card-social-item-size;
+//       text-align: center;
+//       transition: 0.3s;
+//       &:not(:last-of-type) {
+//         margin-right: 10px;
+//       }
+//       &:hover {
+//         background: $secondary;
+//         transform: scale(1.15);
+//       }
+//     }
+//   }
+// }

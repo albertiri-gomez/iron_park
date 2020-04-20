@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ParkPages } from "../pages/Park.pages";
 import { getParkID } from "../../lib/park.api";
-import { getParksOne } from "../../lib/park.api";
 import { LoadScript } from "@react-google-maps/api";
 import { MapView } from "../components/Maps";
 import { Token } from "../../token/token_key";
+
+import { Comments } from "../components/Comments";
+
 
 export const ParkDetail = (props) => {
   console.log(props);
@@ -22,18 +23,28 @@ export const ParkDetail = (props) => {
     return <div>cargando</div>;
   } else {
     return (
-      <LoadScript id="map-google-load" googleMapsApiKey={Token()}>
-        <div>
-          {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
-          <ul>
-            {park?.map((parks) => (
-              <li>{parks.description}</li>
-            ))}
-            {/* <li key={park.name}>{park.description} </li> */}
-          </ul>
-        </div>
-        <MapView value={park[0]?.location}></MapView>
-      </LoadScript>
+      <>
+        <LoadScript id="map-google-load" googleMapsApiKey={Token()}>
+          <div>
+            {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
+            <ul>
+              {park?.map((parks) => (
+                <div>
+                  <li>{parks.description}</li>
+
+                  {parks?.comments.map((contentInfo) => (
+                    <li> {contentInfo.content}</li>
+                  ))}
+                </div>
+              ))}
+              {/* <li key={park.name}>{park.description} </li> */}
+            </ul>
+          </div>
+          <MapView value={park[0]?.location}></MapView>
+
+          <Comments park={park[0]?._id}></Comments>
+        </LoadScript>
+      </>
     );
   }
 };

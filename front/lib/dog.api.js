@@ -54,7 +54,7 @@ export const createDogsImage = async (dogFile) => {
   console.log(dogFile);
   const data = new FormData();
   data.append("image", dogFile.image);
-  data.append("dogName", dogFile.dogname);
+  data.append("dogName", dogFile.dogName);
   data.append("race", dogFile.race);
   data.append("description", dogFile.description);
   console.log("todos los campos con append");

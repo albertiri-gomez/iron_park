@@ -17,10 +17,7 @@ const InputText = styled.input`
   border-radius: 2px;
   color: #444;
   font-size: 1.1em;
-  ::placeholder {
-    color: blue;
-    font-size: 1.5em;
-  }
+
   :focus {
     outline: none;
     border: none;

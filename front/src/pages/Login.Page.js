@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { doLogin } from "../../lib/auth.api";
 import { InputBox } from "../components/Input";
 import { ApiContext } from "../../context/ApiContext";
+
 import {
   Formulario,
   Titulo,
@@ -46,6 +47,7 @@ export const LoginPage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "username")}
               name="username"
+              placeholder="username"
               defaultValues="Username"
               ref={register({ required: true })}
             />
@@ -55,6 +57,7 @@ export const LoginPage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "password")}
               name="password"
+              type="password"
               placeholder="Password"
               ref={register({ required: true })}
             />

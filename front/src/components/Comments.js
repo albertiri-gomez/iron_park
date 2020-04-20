@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { withRouter } from "react-router-dom";
-import { doLogin } from "../../lib/auth.api";
+import { CommentsCreate } from "../../lib/comments.api";
 import { InputBox } from "../components/Input";
 import { ApiContext } from "../../context/ApiContext";
 import {
@@ -10,8 +10,9 @@ import {
   ButtonForm,
 } from "../components/Formularios/Formulario";
 
-export const Comments = withRouter(({ history }) => {
+export const Comments = (park) => {
   const { user, setUser } = useContext(ApiContext);
+  console.log("esto es parque", park);
 
   const methods = useForm({
     mode: "onBlur",
@@ -21,46 +22,54 @@ export const Comments = withRouter(({ history }) => {
   });
 
   const { register, handleSubmit, errors } = methods;
-
+  const idPark = park.park;
   const onSubmit = async (data) => {
-    console.log("Data is");
-    console.log("data", data);
-    const responseServer = await doLogin(data);
+    const commentInfo = {
+      data,
+      user,
+      idPark,
+    };
+    await CommentsCreate(commentInfo);
 
-    if (!responseServer.status) {
-      setUser(data);
-      history.push("/park");
-    } else {
-      console.log(`fallo ${responseServer.message}`);
-      return history.push("/login");
-    }
+    // console.log("Data is");
+    // console.log("data", data);
+    // const commentInfo = { data, park };
+    // await CommentsCreate(commentInfo);
+    // // if (!responseServer.status) {
+    // //   setUser(data);
+    // //   // history.push("/ParkDetail/:id");
+    // // } else {
+    // //   console.log(`fallo ${responseServer.message}`);
+    // //   // return history.push("/ParkDetail/:id");
+    // // }
   };
   return (
     <FormContext {...methods}>
       <>
         <Formulario onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Titulo>Iniciar Sesión</Titulo>
+            <Titulo>añadir comentario</Titulo>
             {/* <label>Username</label> */}
-            <InputBox
+            {/* <InputBox
               // className={hasError(errors, "username")}
-              name="username"
-              defaultValues="Username"
+              name="author"
+              defaultValues=""
+              placeholder="autor"
               ref={register({ required: true })}
-            />
+            /> */}
           </div>
           <div>
             {/* <label>Password</label> */}
             <InputBox
               // className={hasError(errors, "password")}
-              name="password"
-              placeholder="Password"
+              name="content"
+              placeholder="contenido"
               ref={register({ required: true })}
             />
           </div>
-          <ButtonForm type="submit">Login</ButtonForm>
+          <ButtonForm type="submit">comments</ButtonForm>
         </Formulario>
       </>
     </FormContext>
   );
-});
+};

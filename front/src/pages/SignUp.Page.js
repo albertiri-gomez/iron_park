@@ -58,22 +58,24 @@ export const SignUpPage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "username")}
               name="username"
+              placeholder="Username"
               ref={register({ required: true })}
             />
           </div>
           <div>
             <div>
-              <label>Email</label>
               <InputBox
                 // className={hasError(errors, "username")}
                 name="email"
+                placeholder="Email"
                 ref={register({ required: true })}
               />
             </div>
-            <label>Password</label>
             <InputBox
               // className={hasError(errors, "password")}
               name="password"
+              type="password"
+              placeholder="Password"
               ref={register({ required: true })}
             />
           </div>

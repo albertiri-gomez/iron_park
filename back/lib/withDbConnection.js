@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const { MongoError } = require("mongodb");
 
-const DBURLHEROKU = process.env.DBURLHEROKU;
+const DBURL = process.env.DBURL;
 
 const dropIfExists = async (Model) => {
   try {
@@ -20,11 +20,11 @@ const dropIfExists = async (Model) => {
 
 const withDbConnection = async (fn, disconnectEnd = true) => {
   try {
-    await mongoose.connect(DBURLHEROKU, {
+    await mongoose.connect(DBURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(`Connection Ready on ${DBURLHEROKU}`);
+    console.log(`Connection Ready on ${DBURL}`);
     await fn();
   } catch (error) {
     console.log("ERROR");
