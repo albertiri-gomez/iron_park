@@ -3,7 +3,9 @@ import { getParkID } from "../../lib/park.api";
 import { LoadScript } from "@react-google-maps/api";
 import { MapView } from "../components/Maps";
 import { Token } from "../../token/token_key";
+
 import { Comments } from "../components/Comments";
+
 
 export const ParkDetail = (props) => {
   console.log(props);
