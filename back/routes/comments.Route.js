@@ -24,30 +24,14 @@ router.post("/addCommentPark", (req, res, next) => {
         { _id: req.body.idPark },
         { $push: { comments: comment._id } },
         { new: true }
-      ).then((park) => {
-        res.json(park);
-      });
+      )
+        .populate("comments")
+        .then((park) => {
+          console.log("esto es return", park);
+          return res.json(park);
+        });
     })
     .catch((err) => res.status(500).json(err));
-
-  //  const newComment = new Comment(req.body[0].content);
-
-  //  const id = req.body.data[1];
-  // console.log("esto es find", req.params.parkId);
-  // newComment
-  //   .save()
-  //   .then((comment) => {
-  //     console.log("esto es", comment);
-  //     console.log("estos es", id);
-  //     Park.findOneAndUpdate(
-  //       { _id: id },
-  //       { $push: { comments: comment._id } },
-  //       { new: true }
-  //     ).then((park) => {
-  //       res.json(park);
-  //     });
-  //   })
-  //   .catch((err) => res.status(500).json(err));
 });
 
 router.post("/:dogId", (req, res, next) => {
