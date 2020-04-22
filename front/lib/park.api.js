@@ -87,7 +87,7 @@ export const whoUser = async () => {
 };
 
 export const getParkID = async (idPark) => {
-  const res = await api.get("/park");
+  const res = await api.get("/parks");
 
   // Filter for specific park
   const all = _.filter(res.data, { _id: idPark });
