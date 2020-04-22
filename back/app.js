@@ -34,8 +34,8 @@ const app = express();
 // Cross Domain CORS whitlist
 const whitelist = [
   process.env.DBURLHEROKU,
-  process.env.DBAPI,
-  process.env.DBAPIS,
+  process.env.DBURLFRONT_HTTP,
+  process.env.DBURLFRONT_HTTPS,
 ];
 const corsOptions = {
   origin: function (origin, callback) {
