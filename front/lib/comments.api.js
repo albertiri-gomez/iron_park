@@ -9,7 +9,7 @@ const api = axios.create({
 export const CommentsCreate = async (commentInfo) => {
   //   console.log("eeee", commentInfo);
   const res = await api.post(
-    "/addCommentPark",
+    "/comments/addCommentPark",
     commentInfo
     // content,
     // author,
