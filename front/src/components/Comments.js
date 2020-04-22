@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { CommentsCreate } from "../../lib/comments.api";
@@ -10,7 +10,7 @@ import {
   ButtonForm,
 } from "../components/Formularios/Formulario";
 
-export const Comments = (park) => {
+export const Comments = ({ park, setPark }) => {
   const { user, setUser } = useContext(ApiContext);
   console.log("esto es parque", park);
 
@@ -27,10 +27,11 @@ export const Comments = (park) => {
     const commentInfo = {
       data,
       user,
-      idPark,
+      idPark: park,
     };
-    await CommentsCreate(commentInfo);
-
+    const newParks = await CommentsCreate(commentInfo);
+    console.log("que es ", newParks);
+    setPark(newParks);
     // console.log("Data is");
     // console.log("data", data);
     // const commentInfo = { data, park };

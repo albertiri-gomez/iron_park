@@ -6,13 +6,12 @@ import { Token } from "../../token/token_key";
 
 import { Comments } from "../components/Comments";
 
-
 export const ParkDetail = (props) => {
   console.log(props);
   const [park, setPark] = useState();
   //   const [one, setOne]
   const parques = () => {
-    getParkID(props.idPark).then((park) => setPark(park));
+    getParkID(props.idPark).then((park) => setPark(park[0]));
   };
   useEffect(() => {
     parques();
@@ -28,21 +27,20 @@ export const ParkDetail = (props) => {
           <div>
             {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
             <ul>
-              {park?.map((parks) => (
-                <div>
-                  <li>{parks.description}</li>
+              <div>
+                <li>{park?.description}</li>
 
-                  {parks?.comments.map((contentInfo) => (
-                    <li> {contentInfo.content}</li>
-                  ))}
-                </div>
-              ))}
+                {park?.comments.map((contentInfo) => (
+                  <li> {contentInfo.content}</li>
+                ))}
+              </div>
+
               {/* <li key={park.name}>{park.description} </li> */}
             </ul>
           </div>
-          <MapView value={park[0]?.location}></MapView>
+          <MapView value={park?.location}></MapView>
 
-          <Comments park={park[0]?._id}></Comments>
+          <Comments park={park?._id} setPark={setPark}></Comments>
         </LoadScript>
       </>
     );
