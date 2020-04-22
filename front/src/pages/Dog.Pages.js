@@ -41,7 +41,7 @@ export const DogPages = (props) => {
         })}
       </div>
 
-      <Nav defaultActiveKey="/home" as="ul">
+      <Nav defaultActiveKey="/home" as="ul" className="center-button">
         <Nav.Item as="li">
           <Nav.Link as="div">
             <ButtonCreatedDogs>
