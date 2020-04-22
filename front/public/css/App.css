@@ -96,6 +96,7 @@ span {
   width: 25%;
   margin: 1%;
   width: 500px;
+  padding-bottom: 30px;
 
   -webkit-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
@@ -438,4 +439,24 @@ section .section-title {
 
 .flex-meetings {
   display: flex;
+}
+.Button-meeting {
+  color: #ffff33;
+}
+
+.Button-meeting {
+  color: black;
+}
+.Button-meeting:hover {
+  color: #ffff33;
+}
+.Button-meeting:focus {
+  color: #ffff33;
+}
+.center-button {
+  justify-content: center;
+}
+
+.image-margin {
+  margin-top: 20px;
 }

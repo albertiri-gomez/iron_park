@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
 import { getMeeting } from "../../lib/meeting.api";
-import { ApiContext } from "../../context/ApiContext";
 import { withRouter, Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  cardRow,
-  cardHeader,
-  cardDate,
-  cardContent,
-} from "../components/Cards/cardsMeeting";
+import { ButtonCreatedMeetings } from "../components/Formularios/ButtonCreatedMetting";
 
 export const MeetingsPages = (props) => {
   const [meetings, setMeeting] = useState([]);
@@ -117,10 +110,14 @@ export const MeetingsPages = (props) => {
 
       {/* </Card> */}
 
-      <Nav defaultActiveKey="/home" as="ul">
+      <Nav defaultActiveKey="/home" as="ul" className="center-button">
         <Nav.Item as="li">
           <Nav.Link as="div">
-            <Link to="/create_meeting">Crear reunion</Link>
+            <ButtonCreatedMeetings>
+              <Link to="/create_meeting" className="Button-meeting">
+                Crear reunion
+              </Link>
+            </ButtonCreatedMeetings>
           </Nav.Link>
         </Nav.Item>
       </Nav>

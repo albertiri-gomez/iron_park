@@ -30,13 +30,14 @@ const InputText = styled.input`
 `;
 
 export const InputMeetings = React.forwardRef(
-  ({ label, name, type = "text" }, ref) => {
+  ({ label, name, placeholder, type = "text" }, ref) => {
     const { errors } = useFormContext();
     return (
       <div>
         <label>{label}</label>
         <InputText
           type={type}
+          placeholder={placeholder}
           className={hasError(errors, name)}
           name={name}
           ref={ref}

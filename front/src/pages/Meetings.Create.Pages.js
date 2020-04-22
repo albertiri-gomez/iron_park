@@ -64,6 +64,7 @@ export const MeetingsCreate = withRouter(({ history }) => {
             <InputMeetings
               // className={hasError(errors, "password")}
               name="nameMeeting"
+              placeholder="nameMeeting"
               ref={register({ required: true })}
             />
           </div>
@@ -72,6 +73,7 @@ export const MeetingsCreate = withRouter(({ history }) => {
             <InputMeetings
               // className={hasError(errors, "course")}
               name="participants"
+              placeholder="participants"
               ref={register({ required: true })}
             />
           </div>
@@ -80,6 +82,7 @@ export const MeetingsCreate = withRouter(({ history }) => {
             <InputMeetings
               // className={hasError(errors, "course")}
               name="description"
+              placeholder="description"
               ref={register({ required: true })}
             />
           </div>
@@ -88,6 +91,7 @@ export const MeetingsCreate = withRouter(({ history }) => {
             <InputMeetings
               // className={hasError(errors, "course")}
               name="date"
+              placeholder="date"
               ref={register({ required: true })}
             />
           </div>
@@ -96,10 +100,16 @@ export const MeetingsCreate = withRouter(({ history }) => {
             <InputMeetings
               // className={hasError(errors, "course")}
               name="time"
+              placeholder="time"
               ref={register({ required: true })}
             />
           </div>
-          <input name="image" type="file" ref={register()} />
+          <input
+            className="image-margin"
+            name="image"
+            type="file"
+            ref={register()}
+          />
 
           <ButtonCreatedMeetings type="submit">
             Crear Reunión
