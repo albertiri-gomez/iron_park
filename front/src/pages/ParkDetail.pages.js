@@ -6,11 +6,9 @@ import { Token } from "../../token/token_key";
 
 import { Comments } from "../components/Comments";
 
-
 export const ParkDetail = (props) => {
   console.log(props);
   const [park, setPark] = useState();
-  const 
   //   const [one, setOne]
   const parques = () => {
     getParkID(props.idPark).then((park) => setPark(park));
