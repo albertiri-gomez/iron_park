@@ -23,7 +23,10 @@ export const ParkDetail = (props) => {
   } else {
     return (
       <>
-        <LoadScript id="map-google-load" googleMapsApiKey={Token()}>
+        <LoadScript
+          id="map-google-load"
+          googleMapsApiKey={process.env.TOKEN_API}
+        >
           <div>
             {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
             <ul>
