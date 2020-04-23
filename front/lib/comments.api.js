@@ -7,7 +7,6 @@ const api = axios.create({
 });
 
 export const CommentsCreate = async (commentInfo) => {
-  // console.log("eeee", commentInfo);
   const res = await api.post(
     "/addCommentPark",
     commentInfo
@@ -15,6 +14,7 @@ export const CommentsCreate = async (commentInfo) => {
     // author,
     // user: req.user.id,
   );
+  console.log("eeee_coment infodddddddddddddddddd", commentInfo);
   console.log("esto es res", res);
   console.log("Respuesta del server", res.data);
 

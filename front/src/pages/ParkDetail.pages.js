@@ -3,7 +3,11 @@ import { getParkID } from "../../lib/park.api";
 import { LoadScript } from "@react-google-maps/api";
 import { MapView } from "../components/Maps";
 import { Token } from "../../token/token_key";
-
+import {
+  Formulario,
+  Titulo,
+  ButtonForm,
+} from "../components/Formularios/Formulario";
 import { Comments } from "../components/Comments";
 
 export const ParkDetail = (props) => {
@@ -28,10 +32,30 @@ export const ParkDetail = (props) => {
             {/* <p>Las fastansticas frases de "{frases[0]?.ta.nombre}"</p> */}
             <ul>
               <div>
-                <li>{park?.description}</li>
-
-                {park?.comments.map((contentInfo) => (
-                  <li> {contentInfo.content}</li>
+                <div className="photo-center">
+                  <li className="photo-center">
+                    <img src={park?.image} className="photo-img-park"></img>
+                  </li>
+                </div>
+                <li>
+                  <b>Descripción del parque: </b>
+                  {park?.description}
+                </li>
+                <li>
+                  <b>Dirección: </b>
+                  {park.address.locality}, {park.address.postalCode},{" "}
+                  {park.address.streetAddress}
+                </li>
+                <Titulo className="park-text-center color-meetings">
+                  {" "}
+                  Listado de comentarios
+                </Titulo>
+                {park?.comments.map((contentInfo, index) => (
+                  <div key={index}>
+                    <li>
+                      {contentInfo.author} : {contentInfo.content}
+                    </li>
+                  </div>
                 ))}
               </div>
 

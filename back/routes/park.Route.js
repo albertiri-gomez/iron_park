@@ -7,10 +7,17 @@ const isparkFavorite = require("../lib/utils/isParkFavorite");
 router.get("/", isLoggedIn(), (req, res, next) => {
   Park.find()
     .populate("user")
-    .populate("comments")
-    // .populate({ path: "comment", populate: { path: "author" } })
+    // .populate("comments")
+
+    // .populate("author")
+    .populate({
+      path: "comments",
+      model: "Park",
+      populate: { path: "author", model: "Comment" },
+    })
     .then((park) => {
       res.json(park);
+      console.log("esto es park_res", park);
     })
     .catch((err) => res.status(500).json(err));
 });

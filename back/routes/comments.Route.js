@@ -15,6 +15,7 @@ router.post("/addCommentPark", (req, res, next) => {
     user: req.body.user.username,
     content: req.body.data.content,
   });
+  console.log();
   newComment
     .save()
     .then((comment) => {
@@ -26,6 +27,8 @@ router.post("/addCommentPark", (req, res, next) => {
         { new: true }
       )
         .populate("comments")
+        // .populate("author")
+        .populate({ path: "comments", populate: { path: "author" } })
         .then((park) => {
           console.log("esto es return", park);
           return res.json(park);

@@ -4,7 +4,7 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 
 const getImagesPark = async () => {
-  await mongoose.connect(process.env.DBRULHEROKU, {
+  await mongoose.connect(process.env.DBURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -12,6 +12,7 @@ const getImagesPark = async () => {
   // get all the parks from the data base
   const parks = await Park.find({ image: { $exists: false } });
 
+  // console.log("esto son los parques", parks);
   // get image from the Google API and save it in the park document
   let parkCount = 0;
   for (park of parks) {
@@ -19,8 +20,8 @@ const getImagesPark = async () => {
       const response = await axios({
         url: "https://www.googleapis.com/customsearch/v1/",
         params: {
-          key: process.env.GOOGLE_KEY,
-          cx: process.env.GOOGLE_CX,
+          key: process.env.DBKEY_GOOGLE,
+          cx: process.env.DBKEY_CX,
           q: `${park.name} ${park.address.locality}`,
           searchType: "image",
           fileType: "jpg",
@@ -28,16 +29,19 @@ const getImagesPark = async () => {
           alt: "json",
         },
       });
-      park.image = response.data.items[0].link;
+      console.log("esto es response", response.data.items[0].link);
+      Object.assign(park, { image: response.data.items[0].link });
+      // park.image = response.data.items[0].link;
+      // console.log("esto es image", image);
       await park.save();
       console.log(
         `${park.name} image added (${++parkCount} of ${parks.length})`
       );
     } catch (error) {
       console.log(
-        error.response.status,
-        error.response.statusText,
-        `${park.name} (${++parkCount} of ${parks.length})`
+        error
+        // error.response.statusText,
+        // `${park.name} (${++parkCount} of ${parks.length})`
       );
       break;
     }

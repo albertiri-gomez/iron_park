@@ -17,14 +17,17 @@ export const Comments = ({ park, setPark }) => {
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
+      author: user?.username,
       comment: "",
     },
   });
 
   const { register, handleSubmit, errors } = methods;
-  const idPark = park.park;
+  // const idPark = park.park;
   const onSubmit = async (data) => {
+    console.log("esto es data de comment_info", data);
     const commentInfo = {
+      // author,
       data,
       user,
       idPark: park,
@@ -32,43 +35,31 @@ export const Comments = ({ park, setPark }) => {
     const newParks = await CommentsCreate(commentInfo);
     console.log("que es ", newParks);
     setPark(newParks);
-    // console.log("Data is");
-    // console.log("data", data);
-    // const commentInfo = { data, park };
-    // await CommentsCreate(commentInfo);
-    // // if (!responseServer.status) {
-    // //   setUser(data);
-    // //   // history.push("/ParkDetail/:id");
-    // // } else {
-    // //   console.log(`fallo ${responseServer.message}`);
-    // //   // return history.push("/ParkDetail/:id");
-    // // }
   };
   return (
     <FormContext {...methods}>
       <>
         <Formulario onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Titulo>añadir comentario</Titulo>
-            {/* <label>Username</label> */}
-            {/* <InputBox
-              // className={hasError(errors, "username")}
-              name="author"
-              defaultValues=""
-              placeholder="autor"
-              ref={register({ required: true })}
-            /> */}
+            <Titulo className="">Añadir comentario</Titulo>
           </div>
           <div>
-            {/* <label>Password</label> */}
             <InputBox
               // className={hasError(errors, "password")}
-              name="content"
-              placeholder="contenido"
+              name="author"
+              placeholder="Autor"
               ref={register({ required: true })}
             />
           </div>
-          <ButtonForm type="submit">comments</ButtonForm>
+          <div>
+            <InputBox
+              // className={hasError(errors, "password")}
+              name="content"
+              placeholder="Contenido"
+              ref={register({ required: true })}
+            />
+          </div>
+          <ButtonForm type="submit">Comentario</ButtonForm>
         </Formulario>
       </>
     </FormContext>

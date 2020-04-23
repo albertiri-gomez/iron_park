@@ -460,3 +460,37 @@ section .section-title {
 .image-margin {
   margin-top: 20px;
 }
+
+.park-center-cards {
+  width: 45%;
+  display: flex;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+.park-text-center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 12px;
+}
+ul {
+  padding: 13px;
+}
+
+.color-meetings {
+  /* border: 2px solid #33a2ff; */
+  color: #33a2ff !important;
+  border-bottom: 1px solid #33a2ff !important;
+}
+.photo-center {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-img-park {
+  width: 70%;
+}
