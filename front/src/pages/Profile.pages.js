@@ -52,6 +52,7 @@ export const ProfilePage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "username")}
               name="username"
+              placeholder="Username"
               ref={register({ required: true })}
             />
           </div>
@@ -60,6 +61,7 @@ export const ProfilePage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "password")}
               name="password"
+              placeholder="Password"
               ref={register({ required: true })}
             />
           </div>
@@ -68,6 +70,7 @@ export const ProfilePage = withRouter(({ history }) => {
             <InputBox
               // className={hasError(errors, "course")}
               name="email"
+              placeholder="Email"
               ref={register({ required: true })}
             />
           </div>
