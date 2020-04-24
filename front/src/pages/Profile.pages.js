@@ -33,11 +33,11 @@ export const ProfilePage = withRouter(({ history }) => {
         mode: "onBlur",
       });
 
-  console.log(user);
+  // console.log(user);
   const { register, handleSubmit, errors } = methods;
 
   const onEdit = async (data) => {
-    console.log("data", data);
+    // console.log("data", data);
     await doEdit(data);
     setUser(data);
   };

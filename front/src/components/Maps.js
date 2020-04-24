@@ -21,7 +21,7 @@ export const MapView = (location) => {
     lng: location.value.longitude,
   };
 
-  console.log("cetr");
+  // console.log("cetr");
 
   // const data = [{ lat: 40, lng: -3 }];
   if (!parks) {

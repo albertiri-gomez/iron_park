@@ -40,24 +40,31 @@ export const dogEdit = async ({ dogName, race, description, image }) => {
     description,
     image,
   });
-  console.log("edit dog", res);
+  // console.log("edit dog", res);
 };
 
 export const whoUser = async () => {
+  // console.log("whoUser");
+  const res = await api.post("/whoami");
+  // console.log("whami", res.data);
   console.log("whoUser");
   const res = await api.post("/dogs/whoami");
   console.log("whami", res.data);
+
   return res.data;
 };
 
 export const createDogsImage = async (dogFile) => {
-  console.log("this is Datafile");
-  console.log(dogFile);
+  // console.log("this is Datafile");
+  // console.log(dogFile);
   const data = new FormData();
   data.append("image", dogFile.image);
   data.append("dogName", dogFile.dogName);
   data.append("race", dogFile.race);
   data.append("description", dogFile.description);
+  // console.log("todos los campos con append");
+  // console.log(data);
+  const response = await api.post("/", data);
   console.log("todos los campos con append");
   console.log(data);
   const response = await api.post("/dogs", data);

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getMeeting } from "../../lib/meeting.api";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ButtonCreatedMeetings } from "../components/Formularios/ButtonCreatedMetting";
+import moment from "moment";
+import { withProtected } from "../../lib/protectRoute.hoc";
 
-export const MeetingsPages = (props) => {
+const Page = (props) => {
   const [meetings, setMeeting] = useState([]);
 
   useEffect(() => {
@@ -13,88 +15,62 @@ export const MeetingsPages = (props) => {
   }, []);
   return (
     <>
-      {/* <Card style={{ width: "18rem" }}> */}
-      <div class=" flex-meetings">
-        {meetings.map((meeting) => {
+      <div className=" flex-meetings">
+        {meetings.map((meeting, index) => {
           return (
-            <>
-              {/* <ul class="menu-content">
-                      <li>
-                        <a href="#" class="fa fa-bookmark-o"></a>
-                      </li>
-                      <li>
-                        <a href="#" class="fa fa-heart-o">
-                          <span>18</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="fa fa-comment-o">
-                          <span>3</span>
-                        </a>
-                      </li>
-                    </ul> */}
-              {/* <Card.Img variant="top" src={meeting.image.url} />
-              <Card.Body>
-                <Card.Title>{meeting.nameMeeting}</Card.Title>
-                <Card.Text>{meeting.description}</Card.Text>
-                <Card.Text>{meeting.date}</Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body> */}
-              {/* <div class="cards-list">
-                <div class="card 1">
-                  <div class="card_image">
-                    {" "}
-                    <img src={meeting.image?.url} />
-                    <div>
-                      <p>{meeting.date}</p>
-                      <p>{meeting.participants}</p>
-                    </div>
-                  </div>
-                  <div class="card_title title-white">
-                    <p>{meeting.nameMeeting}</p>
-                  </div>
-                </div>
-              </div> */}
-              {/* <section id="team" class="pb-5"> */}
-              <div class="container">
-                <div class="row">
-                  {/* <div class="col-xs-12 col-sm-6 col-md-4"> */}
-                  <div class="format-w">
-                    <div
-                      class="image-flip"
-                      ontouchstart="this.classList.toggle('hover');"
-                    >
-                      <div class="mainflip">
-                        <div class="frontside">
-                          <div class="card">
-                            <div class="card-body text-center">
-                              <p>
-                                <img
-                                  class=" img-fluid"
-                                  src={meeting.image?.url}
-                                  alt="card image"
-                                ></img>
-                              </p>
-                              <h4 class="card-title">{meeting.nameMeeting}</h4>
-                              <p class="card-text">{meeting.description}</p>
-                            </div>
+            <div className="container" key={index}>
+              <div className="row">
+                {/* <div className="col-xs-12 col-sm-6 col-md-4"> */}
+                <div className="format-w">
+                  <div
+                    className="image-flip"
+                    // ontouchstart="this.classList.toggle('hover');"
+                  >
+                    <div className="mainflip">
+                      <div className="frontside">
+                        <div className="card">
+                          <div className="card-body text-center">
+                            <p>
+                              <img
+                                className=" img-fluid"
+                                src={meeting.image?.url}
+                                alt="card image"
+                              ></img>
+                            </p>
+                            <h4 className="card-title">
+                              {meeting.nameMeeting}
+                            </h4>
+                            <p className="card-text">{meeting.description}</p>
                           </div>
                         </div>
-                        <div class="backside">
-                          <div class="card">
-                            <div class="card-body text-center mt-4">
-                              <h4 class="card-title">{meeting.nameMeeting}</h4>
-                              <p class="card-text">{meeting.description}</p>
-                              <p class="card-text">
-                                Fecha de la reunión: {meeting.date}
-                              </p>
-                              <p class="card-text">
-                                Número de participantes: {meeting.participants}
-                              </p>
-                              <p class="card-text">
-                                Hora de la reunión: {meeting.time}
-                              </p>
-                            </div>
+                      </div>
+                      <div className="backside">
+                        <div className="card">
+                          <div className="card-body text-center mt-4">
+                            <h4 className="card-title">
+                              {meeting.nameMeeting}
+                            </h4>
+                            <p className="card-text">{meeting.description}</p>
+                            <p className="card-text">
+                              <span className="span-color">
+                                Fecha de la reunión:
+                              </span>{" "}
+                              {moment().format("MMMM Do YYYY", meeting.date)}
+                            </p>
+                            <p className="card-text">
+                              <span className="span-color">
+                                {" "}
+                                Número de participantes:
+                              </span>{" "}
+                              {meeting.participants}
+                            </p>
+                            <p className="card-text">
+                              <span className="span-color">
+                                {" "}
+                                Hora de la reunión:
+                              </span>{" "}
+                              {meeting.time}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -102,14 +78,10 @@ export const MeetingsPages = (props) => {
                   </div>
                 </div>
               </div>
-              {/* </section> */}
-            </>
+            </div>
           );
         })}
       </div>
-
-      {/* </Card> */}
-
       <Nav defaultActiveKey="/home" as="ul" className="center-button">
         <Nav.Item as="li">
           <Nav.Link as="div">
@@ -124,3 +96,5 @@ export const MeetingsPages = (props) => {
     </>
   );
 };
+
+export const MeetingsPages = withProtected(Page);

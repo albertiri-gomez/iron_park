@@ -59,10 +59,10 @@ span {
   color: black;
 }
 .button-dog:hover {
-  color: #62a281;
+  color: #0cf12b;
 }
 .button-dog:focus {
-  color: #62a281;
+  color: #0cf12b;
 }
 
 .padding-image {
@@ -96,7 +96,7 @@ span {
   width: 25%;
   margin: 1%;
   width: 500px;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
 
   -webkit-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
@@ -376,6 +376,7 @@ section .section-title {
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   z-index: 2;
+  width: 50%;
   margin-bottom: 30px;
 }
 
@@ -383,7 +384,7 @@ section .section-title {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   background: white;
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);
@@ -471,6 +472,8 @@ section .section-title {
   text-align: center;
   display: flex;
   justify-content: center;
+  color: black;
+  font-weight: 600;
 }
 
 li {
@@ -498,4 +501,15 @@ ul {
 .foto-parks {
   width: 497px;
   height: 332px;
+}
+
+.span-color {
+  color: #007b5e;
+}
+.span-color-dog {
+  color: #0cf12b;
+}
+.text-center-photo {
+  text-align: center;
+  margin-bottom: 30px;
 }

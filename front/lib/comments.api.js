@@ -15,7 +15,7 @@ export const CommentsCreate = async (commentInfo) => {
     // user: req.user.id,
   );
   console.log("eeee_coment infodddddddddddddddddd", commentInfo);
-  console.log("esto es res", res);
+  // console.log("esto es res", res);
   console.log("Respuesta del server", res.data);
 
   return res.data;

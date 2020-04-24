@@ -23,7 +23,7 @@ router.post(
   async (req, res, next) => {
     try {
       const { nameMeeting, participants, time, date, description } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       const newMeeting = await Meeting.create({
         user: req.user.id,
         park: req.body.park,

@@ -6,8 +6,12 @@ const api = axios.create({
 });
 
 export const getMeeting = async () => {
+
+  const res = await api.get("/");
+  // console.log(res.data);
   const res = await api.get("/meetings");
   console.log(res.data);
+
   return res.data;
 };
 

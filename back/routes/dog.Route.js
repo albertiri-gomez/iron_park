@@ -39,8 +39,8 @@ router.post(
   "/",
   uploadCloudinaryAvatar.single("image"),
   async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     try {
       const { description, dogName, race } = req.body;
       const newDog = await Dog.create({

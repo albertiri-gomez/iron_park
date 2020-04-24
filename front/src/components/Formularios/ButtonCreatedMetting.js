@@ -4,7 +4,7 @@ export const ButtonCreatedMeetings = styled.button`
 box-sizing: border-box;
 appearance: none;
 background-color: transparent;
-border: 2px solid #FFFF33;
+border: 2px solid #007b5e;
 border-radius: 0.6em;
 color: #030000;
 cursor: pointer;
@@ -24,7 +24,7 @@ margin-top:25px;
 
 &:hover,
 &:focus {
-  color: #FFFF33;
+  color: #007b5e;
   outline: 0;
 }
 }
