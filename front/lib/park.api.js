@@ -79,14 +79,14 @@ export const parkEdit = async ({
   console.log("edit park", res);
 };
 
-export const whoUser = async () => {
-  console.log("whoUser");
-  // console.log("whoUser");
-  const res = await api.post("/whoami");
-  console.log("whami", res.data);
-  // console.log("whami", res.data);
-  return res.data;
-};
+// export const whoUser = async () => {
+//   console.log("whoUser");
+//   // console.log("whoUser");
+//   const res = await api.post("/whoami");
+//   console.log("whami", res.data);
+//   // console.log("whami", res.data);
+//   return res.data;
+// };
 
 export const getParkID = async (idPark) => {
   const res = await api.get("/parks");
