@@ -44,9 +44,9 @@ export const dogEdit = async ({ dogName, race, description, image }) => {
 };
 
 export const whoUser = async () => {
-  // console.log("whoUser");
+  console.log("whoUser");
   const res = await api.post("/whoami");
-  // console.log("whami", res.data);
+  console.log("whami", res.data);
   console.log("whoUser");
   const res = await api.post("/dogs/whoami");
   console.log("whami", res.data);
