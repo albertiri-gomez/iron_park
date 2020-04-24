@@ -30,6 +30,7 @@ export const ParkDetail = (props) => {
           <div>
             <ul>
               <div>
+                <h3 className="text-center-photo">{park?.name}</h3>
                 <div className="photo-center">
                   <li className="photo-center">
                     <img src={park?.image} className="photo-img-park"></img>

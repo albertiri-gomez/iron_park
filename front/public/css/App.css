@@ -376,6 +376,7 @@ section .section-title {
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   z-index: 2;
+  width: 50%;
   margin-bottom: 30px;
 }
 
@@ -383,7 +384,7 @@ section .section-title {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   background: white;
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);
@@ -507,4 +508,8 @@ ul {
 }
 .span-color-dog {
   color: #0cf12b;
+}
+.text-center-photo {
+  text-align: center;
+  margin-bottom: 30px;
 }
