@@ -22,9 +22,9 @@ export const Comments = ({ park, setPark }) => {
     },
   });
 
-  const { register, handleSubmit, errors } = methods;
+  const { register, handleSubmit, reset } = methods;
   // const idPark = park.park;
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
     console.log("esto es data de comment_info", data);
     const commentInfo = {
       // author,
@@ -35,6 +35,7 @@ export const Comments = ({ park, setPark }) => {
     const newParks = await CommentsCreate(commentInfo);
     console.log("que es ", newParks);
     setPark(newParks);
+    e.target.reset();
   };
   return (
     <FormContext {...methods}>
@@ -43,14 +44,14 @@ export const Comments = ({ park, setPark }) => {
           <div>
             <Titulo className="">Añadir comentario</Titulo>
           </div>
-          <div>
+          {/* <div>
             <InputBox
               // className={hasError(errors, "password")}
               name="author"
               placeholder="Autor"
               ref={register({ required: true })}
             />
-          </div>
+          </div> */}
           <div>
             <InputBox
               // className={hasError(errors, "password")}

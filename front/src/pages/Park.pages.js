@@ -24,7 +24,11 @@ export const ParkPages = (props) => {
             <>
               <CardGroup key={index} className="park-center-cards">
                 <Card>
-                  <Card.Img variant="top" src={park.image} />
+                  <Card.Img
+                    variant="top"
+                    src={park.image}
+                    className="foto-parks"
+                  />
                   <Card.Body>
                     <Card.Title className="park-text-center">
                       {park.name}

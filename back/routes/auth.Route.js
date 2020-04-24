@@ -20,13 +20,13 @@ router.post("/signup", async (req, res, next) => {
       password,
     });
     // console.log(newUser);
-    if (hasDog === true) {
-      const newDog = await Dog.create({
-        dogName,
-        user: newUser._id,
-      });
-      console.log(newDog);
-    }
+    // if (hasDog === true) {
+    //   const newDog = await Dog.create({
+    //     dogName,
+    //     user: newUser._id,
+    //   });
+    //   console.log(newDog);
+    // }
     // Directly login user
     req.logIn(newUser, (err) => {
       res.json(_.pick(req.user, ["username", "_id", "createdAt", "updatedAt"]));

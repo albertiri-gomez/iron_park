@@ -441,17 +441,17 @@ section .section-title {
   display: flex;
 }
 .Button-meeting {
-  color: #ffff33;
+  color: #007b5e;
 }
 
 .Button-meeting {
   color: black;
 }
 .Button-meeting:hover {
-  color: #ffff33;
+  color: #007b5e;
 }
 .Button-meeting:focus {
-  color: #ffff33;
+  color: #007b5e;
 }
 .center-button {
   justify-content: center;
@@ -493,4 +493,9 @@ ul {
 
 .photo-img-park {
   width: 70%;
+}
+
+.foto-parks {
+  width: 497px;
+  height: 332px;
 }
