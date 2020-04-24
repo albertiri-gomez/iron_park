@@ -64,9 +64,6 @@ export const createDogsImage = async (dogFile) => {
   data.append("description", dogFile.description);
   console.log("todos los campos con append");
   console.log(data);
-  const response = await api.post("/", data);
-  console.log("todos los campos con append");
-  console.log(data);
   const response = await api.post("/dogs", data);
   return response.data;
 };
