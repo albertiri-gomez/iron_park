@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext } from "react";
+require("dotenv").config();
 
 export const UserContext = React.createContext();
 
@@ -30,9 +31,11 @@ export const useUserLogout = () => {
     return doLogout();
   };
 };
+const DBAPI = process.env.DBAPI;
+// ${Model.collection.name}
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/auth",
+  baseURL: process.env.DBAPI,
   withCredentials: true,
 });
 
@@ -43,7 +46,7 @@ export const doSignup = async ({
   dogName,
   hasDog,
 }) => {
-  const res = await api.post("/signup", {
+  const res = await api.post("/auth/signup", {
     username,
     password,
     email,
@@ -58,7 +61,7 @@ export const doSignup = async ({
 
 export const doLogin = async ({ username, password }) => {
   console.log("Login usuario...", username, password);
-  const res = await api.post("/login", {
+  const res = await api.post("/auth/login", {
     username,
     password,
   });
@@ -69,20 +72,20 @@ export const doLogin = async ({ username, password }) => {
 
 export const doLogout = async () => {
   console.log("loggin out!");
-  const res = await api.post("/logout");
+  const res = await api.post("/auth/logout");
   console.log(" logout", res);
 };
 
 export const whoami = async () => {
   console.log("whoUser");
-  const res = await api.post("/whoami");
+  const res = await api.post("/auth/whoami");
   console.log("whami", res.data);
   return res.data;
 };
 
 export const doEdit = async ({ username, email, password }) => {
   console.log("edit!");
-  const res = await api.put("/:id", {
+  const res = await api.put("/auth/:id", {
     username,
     password,
     email,

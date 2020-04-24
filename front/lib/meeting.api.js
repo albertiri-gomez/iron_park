@@ -1,13 +1,17 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/meetings",
+  baseURL: process.env.DBAPI,
   withCredentials: true,
 });
 
 export const getMeeting = async () => {
+
   const res = await api.get("/");
   // console.log(res.data);
+  const res = await api.get("/meetings");
+  console.log(res.data);
+
   return res.data;
 };
 
@@ -20,7 +24,7 @@ export const createMeeting = async ({
   time,
   date,
 }) => {
-  const res = await api.post("/", {
+  const res = await api.post("/meetings", {
     user,
     park,
     nameMeeting,
@@ -44,7 +48,7 @@ export const meetingEdit = async ({
   date,
 }) => {
   console.log("edit!");
-  const res = await api.put("/:id", {
+  const res = await api.put("/meetings/:id", {
     user,
     park,
     nameMeeting,
@@ -65,7 +69,7 @@ export const meetingDelete = async ({
   time,
   date,
 }) => {
-  const res = await api.delete("/:id", {
+  const res = await api.delete("/meetings/:id", {
     user,
     park,
     nameMeeting,
@@ -79,7 +83,7 @@ export const meetingDelete = async ({
 
 export const whoUser = async () => {
   console.log("whoUser");
-  const res = await api.post("/whoami");
+  const res = await api.post("/meetings/whoami");
   console.log("whami", res.data);
   return res.data;
 };
@@ -96,6 +100,6 @@ export const createMeetingsImage = async (meetingFile) => {
   data.append("date", meetingFile.date);
   console.log("todos los campos con append");
   console.log(data);
-  const response = await api.post("/", data);
+  const response = await api.post("/meetings", data);
   return response.data;
 };

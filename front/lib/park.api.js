@@ -2,7 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/parks",
+  baseURL: process.env.DBAPI,
   withCredentials: true,
 });
 
@@ -29,7 +29,7 @@ const api = axios.create({
 //   return res.data;
 // };
 export const getParks = async () => {
-  const res = await api.get("/");
+  const res = await api.get("/parks");
   console.log(res.data);
   return res.data;
 };
@@ -43,7 +43,7 @@ export const getParksOne = async ({
   comments,
   user,
 }) => {
-  const res = await api.get("/:id", {
+  const res = await api.get("/parks/:id", {
     name,
     address,
     description,
@@ -67,7 +67,7 @@ export const parkEdit = async ({
   user,
 }) => {
   console.log("edit!");
-  const res = await api.put("/:id", {
+  const res = await api.put("/parks/:id", {
     name,
     address,
     description,
@@ -81,13 +81,13 @@ export const parkEdit = async ({
 
 export const whoUser = async () => {
   console.log("whoUser");
-  const res = await api.post("/whoami");
+  const res = await api.post("/parks/whoami");
   console.log("whami", res.data);
   return res.data;
 };
 
 export const getParkID = async (idPark) => {
-  const res = await api.get("/");
+  const res = await api.get("/parks");
 
   // Filter for specific park
   const all = _.filter(res.data, { _id: idPark });

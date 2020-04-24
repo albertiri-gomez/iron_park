@@ -1,7 +1,8 @@
 import axios from "axios";
+require("dotenv").config();
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/dogs",
+  baseURL: process.env.DBAPI,
   withCredentials: true,
 });
 
@@ -19,7 +20,7 @@ const api = axios.create({
 // };
 
 export const getDogs = async () => {
-  const res = await api.get("/");
+  const res = await api.get("/dogs");
   // console.log(res.data);
   return res.data;
 };
@@ -33,7 +34,7 @@ export const getDogs = async () => {
 
 export const dogEdit = async ({ dogName, race, description, image }) => {
   console.log("edit!");
-  const res = await api.put("/:id", {
+  const res = await api.put("/dogs/:id", {
     dogName,
     race,
     description,
@@ -46,6 +47,10 @@ export const whoUser = async () => {
   // console.log("whoUser");
   const res = await api.post("/whoami");
   // console.log("whami", res.data);
+  console.log("whoUser");
+  const res = await api.post("/dogs/whoami");
+  console.log("whami", res.data);
+
   return res.data;
 };
 
@@ -60,5 +65,8 @@ export const createDogsImage = async (dogFile) => {
   // console.log("todos los campos con append");
   // console.log(data);
   const response = await api.post("/", data);
+  console.log("todos los campos con append");
+  console.log(data);
+  const response = await api.post("/dogs", data);
   return response.data;
 };
