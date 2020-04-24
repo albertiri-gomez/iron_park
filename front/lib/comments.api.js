@@ -7,7 +7,6 @@ const api = axios.create({
 });
 
 export const CommentsCreate = async (commentInfo) => {
-  //   console.log("eeee", commentInfo);
   const res = await api.post(
     "/comments/addCommentPark",
     commentInfo
@@ -15,37 +14,9 @@ export const CommentsCreate = async (commentInfo) => {
     // author,
     // user: req.user.id,
   );
+  console.log("eeee_coment infodddddddddddddddddd", commentInfo);
+  console.log("esto es res", res);
   console.log("Respuesta del server", res.data);
-  console.log("perros Mostrados");
+
   return res.data;
 };
-
-// router.post("/:parkId", (req, res, next) => {
-//     const newComment = new Comment(req.body);
-//     console.log("esto es find", req.params.parkId);
-//     newComment
-//       .save()
-//       .then((comment) => {
-//         Park.findOneAndUpdate(
-//           { _id: req.params.parkId },
-//           { $push: { comments: comment._id } },
-//           { new: true }
-//         ).then((park) => {
-//           res.json(park);
-//         });
-//       })
-//       .catch((err) => res.status(500).json(err));
-//   });
-
-// export const getDogs = async ({ dogName, race, description, image, user }) => {
-//   const res = await api.get("/", {
-//     dogName,
-//     race,
-//     description,
-//     image,
-//     user: mongoose.Types.ObjectId(req.user.id),
-//   });
-//   console.log("Respuesta del server", res.data);
-//   console.log("perros Mostrados");
-//   return res.data;
-// };

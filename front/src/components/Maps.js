@@ -12,10 +12,10 @@ export const MapView = (location) => {
 
   //      *** REQUISITOS PARA CENTRAR EL MAPA ***
   const size = {
-    height: "100vh",
-    width: "100vw",
+    height: "50vh",
+    // width: "100vw",
   };
-  const zoom = 7;
+  const zoom = 15;
   const center = {
     lat: location.value.latitude,
     lng: location.value.longitude,

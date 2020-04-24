@@ -10,22 +10,22 @@ const getPark = async () => {
     const response = await axios({
       method: "get",
       url:
-        "https://datos.madrid.es/egob/catalogo/200761-0-parques-jardines.json"
+        "https://datos.madrid.es/egob/catalogo/200761-0-parques-jardines.json",
     });
     parks = response.data["@graph"];
-    parks = parks.filter(e => e.location);
-    parks = parks.map(park => ({
+    parks = parks.filter((e) => e.location);
+    parks = parks.map((park) => ({
       name: park.title,
       address: {
         locality: park.address.locality,
         postalCode: park.address["postal-code"],
-        streetAddress: park.address["street-address"]
+        streetAddress: park.address["street-address"],
       },
       location: {
         latitude: park.location.latitude,
-        longitude: park.location.longitude
+        longitude: park.location.longitude,
       },
-      description: park.organization["organization-desc"]
+      description: park.organization["organization-desc"],
     }));
   } catch (error) {
     console.log(error);
