@@ -81,8 +81,10 @@ export const parkEdit = async ({
 
 export const whoUser = async () => {
   console.log("whoUser");
-  const res = await api.post("/parks/whoami");
+  // console.log("whoUser");
+  const res = await api.post("/whoami");
   console.log("whami", res.data);
+  // console.log("whami", res.data);
   return res.data;
 };
 
