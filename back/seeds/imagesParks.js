@@ -4,7 +4,7 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 
 const getImagesPark = async () => {
-  await mongoose.connect(process.env.DBURL, {
+  await mongoose.connect(process.env.DBURLHEROKU, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
