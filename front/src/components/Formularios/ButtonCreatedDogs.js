@@ -4,7 +4,7 @@ export const ButtonCreatedDogs = styled.button`
 box-sizing: border-box;
 appearance: none;
 background-color: transparent;
-border: 2px solid #62A281;
+border: 2px solid #0CF12B;
 border-radius: 0.6em;
 color: #030000;
 cursor: pointer;
@@ -24,7 +24,7 @@ margin-top:25px;
 
 &:hover,
 &:focus {
-  color: #62A281;
+  color: #0CF12B;
   outline: 0;
 }
 }

@@ -6,11 +6,12 @@ import { ApiContext } from "../../context/ApiContext";
 import { InputMeetings } from "../components/Formularios/InputMeetings";
 import { Formulario, Titulo } from "../components/Formularios/Formulario";
 import { ButtonCreatedMeetings } from "../components/Formularios/ButtonCreatedMetting";
+import { withProtected } from "../../lib/protectRoute.hoc";
 
 const cloudinary = require("cloudinary-core");
 const cl = cloudinary.Cloudinary.new({ cloud_name: "meeting" });
 
-export const MeetingsCreate = withRouter(({ history }) => {
+const Page = withRouter(({ history }) => {
   const { user, setUser } = useContext(ApiContext);
 
   const methods = user
@@ -24,11 +25,11 @@ export const MeetingsCreate = withRouter(({ history }) => {
         mode: "onBlur",
       });
 
-  console.log(user);
+  // console.log(user);
   const { register, handleSubmit, errors } = methods;
 
   const onCreateMeetings = async (data) => {
-    console.log(data);
+    // console.log(data);
     const myMeeting = data.image[0];
     data.image = myMeeting;
     createMeetingsImage(myMeeting)
@@ -50,55 +51,37 @@ export const MeetingsCreate = withRouter(({ history }) => {
     <FormContext {...methods}>
       <>
         <Formulario onSubmit={handleSubmit(onCreateMeetings)}>
-          {/* <div> */}
           <Titulo>Crear Reunión</Titulo>
-          {/* <label>Usuario</label> */}
-          {/* <InputMeetings
-              // className={hasError(errors, "username")}
-              name="username"
-              ref={register({ required: true })}
-            />
-          </div> */}
           <div>
-            {/* <label>Nombre de la reunión</label> */}
             <InputMeetings
-              // className={hasError(errors, "password")}
               name="nameMeeting"
               placeholder="nameMeeting"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            {/* <label>Participantes</label> */}
             <InputMeetings
-              // className={hasError(errors, "course")}
               name="participants"
               placeholder="participants"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            {/* <label>Descripción</label> */}
             <InputMeetings
-              // className={hasError(errors, "course")}
               name="description"
               placeholder="description"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            {/* <label>Fecha de la reunión</label> */}
             <InputMeetings
-              // className={hasError(errors, "course")}
               name="date"
               placeholder="date"
               ref={register({ required: true })}
             />
           </div>
           <div>
-            {/* <label>Hora de la reunión</label> */}
             <InputMeetings
-              // className={hasError(errors, "course")}
               name="time"
               placeholder="time"
               ref={register({ required: true })}
@@ -110,7 +93,6 @@ export const MeetingsCreate = withRouter(({ history }) => {
             type="file"
             ref={register()}
           />
-
           <ButtonCreatedMeetings type="submit">
             Crear Reunión
           </ButtonCreatedMeetings>
@@ -119,3 +101,5 @@ export const MeetingsCreate = withRouter(({ history }) => {
     </FormContext>
   );
 });
+
+export const MeetingsCreate = withProtected(Page);

@@ -31,7 +31,7 @@ router.post("/signup", async (req, res, next) => {
     req.logIn(newUser, (err) => {
       res.json(_.pick(req.user, ["username", "_id", "createdAt", "updatedAt"]));
     });
-    console.log(username, "register");
+    // console.log(username, "register");
   } else {
     res.json({ status: "User Exist" });
   }
@@ -44,7 +44,7 @@ router.post("/login", (req, res, next) => {
       console.log(err);
       return res.json({ status: 500, message: "Authentication Error" });
     }
-    console.log(user);
+    // console.log(user);
     if (!user) {
       return res.json({ status: 401, message: failureDetails.message });
     }

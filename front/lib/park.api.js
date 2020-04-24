@@ -53,7 +53,7 @@ export const getParksOne = async ({
     user,
   });
   console.log("Respuesta del server", res.data);
-  console.log("parques Mostrados");
+  // console.log("parques Mostrados");
   return res.data;
 };
 

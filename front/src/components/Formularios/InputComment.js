@@ -7,7 +7,7 @@ const hasError = (errors, name) => {
   return;
 };
 
-const InputText = styled.input`
+const InputText = styled.textarea`
   display: block;
   padding: 8px 8px;
   margin: auto;
@@ -21,7 +21,7 @@ const InputText = styled.input`
   :focus {
     outline: none;
     border: none;
-    border-left: 13px solid #0cf12b;
+    border-left: 13px solid #33a2ff;
     box-shadow: 1px 5px 10px #ccc;
     opacity: 1;
     left: 30px;
@@ -29,7 +29,7 @@ const InputText = styled.input`
   }
 `;
 
-export const InputDogs = React.forwardRef(
+export const InputComment = React.forwardRef(
   ({ label, name, type, placeholder = "text" }, ref) => {
     const { errors } = useFormContext();
     return (
@@ -38,9 +38,9 @@ export const InputDogs = React.forwardRef(
         <InputText
           type={type}
           className={hasError(errors, name)}
-          placeholder={placeholder}
           name={name}
           ref={ref}
+          placeholder={placeholder}
         />
         {errors[name]?.message && <div>{errors[name].message}</div>}
       </div>

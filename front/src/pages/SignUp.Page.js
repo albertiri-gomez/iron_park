@@ -27,11 +27,7 @@ export const SignUpPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const onSubmit = async (data) => {
-    console.log("data", data);
-    // if (data.dogName === "")
-    // {
-    //   return false
-    // }
+    // console.log("data", data);
     const responseServer = await doSignup({
       ...data,
       hasDog: data.dogName == "" ? false : true,
