@@ -51,9 +51,7 @@ export const ParkDetail = (props) => {
                 </Titulo>
                 {park?.comments.map((contentInfo, index) => (
                   <div key={index}>
-                    <li>
-                      {contentInfo?.author}: {contentInfo.content}
-                    </li>
+                    <li>{contentInfo.content}</li>
                   </div>
                 ))}
               </div>
