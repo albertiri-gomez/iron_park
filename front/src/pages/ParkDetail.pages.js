@@ -52,7 +52,7 @@ export const ParkDetail = (props) => {
                 {park?.comments.map((contentInfo, index) => (
                   <div key={index}>
                     <li>
-                      {contentInfo.author?.username}: {contentInfo.content}
+                      {contentInfo?.author}: {contentInfo.content}
                     </li>
                   </div>
                 ))}
