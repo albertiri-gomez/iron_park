@@ -42,13 +42,13 @@ export const Comments = ({ park, setPark }) => {
           <div>
             <Titulo className="">Añadir comentario</Titulo>
           </div>
-          <div>
+          {/* <div>
             <InputComment
               name="author"
               placeholder="Autor"
               ref={register({ required: true })}
             />
-          </div>
+          </div> */}
           <div>
             <InputComment
               name="content"
