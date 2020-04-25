@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema(
   {
-    author: { type: Schema.Types.ObjectId, ref: "User" },
-    // author: { type: String },
+    // author: { type: Schema.Types.ObjectId, ref: "User" },
+    author: { type: String },
     content: { type: String },
     rates: {
       stars: { type: Number, default: 0, require: true },
